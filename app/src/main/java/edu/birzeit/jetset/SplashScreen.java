@@ -1,5 +1,6 @@
 package edu.birzeit.jetset;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -23,13 +25,10 @@ public class SplashScreen extends AppCompatActivity {
             return insets;
         });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent backToMain = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(backToMain);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent backToMain = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(backToMain);
+            finish();
         }, 5000);
 
     }
