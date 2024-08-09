@@ -37,6 +37,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation(libs.lottie)
+    implementation(libs.window)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
