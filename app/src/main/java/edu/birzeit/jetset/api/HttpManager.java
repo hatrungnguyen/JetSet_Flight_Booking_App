@@ -1,4 +1,4 @@
-package edu.birzeit.jetset;
+package edu.birzeit.jetset.api;
 
 import android.util.Log;
 

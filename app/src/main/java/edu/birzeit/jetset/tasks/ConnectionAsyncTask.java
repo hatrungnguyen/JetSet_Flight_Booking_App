@@ -1,9 +1,9 @@
-package edu.birzeit.jetset;
+package edu.birzeit.jetset.tasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import java.util.List;
+import edu.birzeit.jetset.api.HttpManager;
 
 public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
     Activity activity;
