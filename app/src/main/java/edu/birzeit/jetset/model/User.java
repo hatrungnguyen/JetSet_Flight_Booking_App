@@ -5,22 +5,22 @@ public abstract class User {
     private String phoneNumber;
     private String firstName;
     private String lastName;
-    private String password;
+    private String hashedPassword;
 
     public User(){
         this.email = "";
         this.phoneNumber = "";
         this.firstName = "";
         this.lastName = "";
-        this.password = "";
+        this.hashedPassword = "";
     }
 
-    public User(String email, String phoneNumber, String firstName, String lastName, String password) {
+    public User(String email, String phoneNumber, String firstName, String lastName, String hashedPassword) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
     }
 
     public String getEmail() {
@@ -55,12 +55,12 @@ public abstract class User {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
 }

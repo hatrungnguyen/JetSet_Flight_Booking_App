@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.model.Admin;
+import edu.birzeit.jetset.tasks.Hash;
 
 public class SignUpAdminActivity extends AppCompatActivity {
 
@@ -82,8 +83,15 @@ public class SignUpAdminActivity extends AppCompatActivity {
                 return;
             }
 
+            if (dataBaseHelper.getUsersByEmail(editEmail.getText().toString()).getCount() > 0) {
+                Toast.makeText(this, "Admin already exists", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String hashedPassword = Hash.hashPassword(editPassword.getText().toString());
+
             createAdmin(admin, editEmail.getText().toString(), editPhoneNumber.getText().toString(), editFirstName.getText().toString(),
-                    editLastName.getText().toString(), editPassword.getText().toString());
+                    editLastName.getText().toString(), hashedPassword);
 
             dataBaseHelper.insertAdmin(admin);
 
@@ -157,7 +165,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
         admin.setPhoneNumber(phoneNumber);
         admin.setFirstName(firstName);
         admin.setLastName(lastName);
-        admin.setPassword(password);
+        admin.setHashedPassword(password);
     }
 
 

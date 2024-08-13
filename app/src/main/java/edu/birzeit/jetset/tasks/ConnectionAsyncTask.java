@@ -1,36 +1,39 @@
 package edu.birzeit.jetset.tasks;
 
-import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import edu.birzeit.jetset.api.HttpManager;
 
+
 public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
-    Activity activity;
+    private static final String TAG = "ConnectionAsyncTask";
+    private TaskCallback taskCallback;
 
-    public ConnectionAsyncTask(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    protected void onPreExecute() {
-//        ((MainActivity) activity).setButtonText("connecting");
-//        super.onPreExecute();
-//        ((MainActivity) activity).setProgress(true);
+    public ConnectionAsyncTask(TaskCallback taskCallback) {
+        this.taskCallback = taskCallback;
     }
 
     @Override
     protected String doInBackground(String... params) {
-        return HttpManager.getData(params[0]);
+        String result = HttpManager.getData(params[0]);
+        return result != null && !result.isEmpty() ? result : null;
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-//        ((MainActivity) activity).setProgress(false);
-//        ((MainActivity) activity).setButtonText("connected");
-//        List<Student> students =
-//                StudentJsonParser.getObjectFromJson(s);
-//        ((MainActivity) activity).fillStudents(students);
+    protected void onPostExecute(String result) {
+        if (result != null) {
+            taskCallback.onTaskSuccess(result);
+            Log.d(TAG, "Task succeeded: " + result);
+        } else {
+            taskCallback.onTaskFailure();
+        }
+    }
+
+    public interface TaskCallback {
+        void onTaskSuccess(String result);
+
+        void onTaskFailure();
     }
 }
+

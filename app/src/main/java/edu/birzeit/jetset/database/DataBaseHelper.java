@@ -16,7 +16,7 @@ import edu.birzeit.jetset.model.Reservation;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "jetset.db";
+    private static final String DATABASE_NAME = "JJetSet.db";
     private static final int DATABASE_VERSION = 1;
 
     public DataBaseHelper(@Nullable Context context) {
@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "PHONE TEXT, " +
                 "FIRST_NAME TEXT, " +
                 "LAST_NAME TEXT, " +
-                "PASSWORD TEXT, " +
+                "HASHED_PASSWORD TEXT, " +
                 "ROLE TEXT, " +  // Admin or Passenger
                 "PASSPORT_NUMBER TEXT, " +
                 "PASSPORT_ISSUE_DATE TEXT, " +
@@ -46,10 +46,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FLIGHT_NUMBER TEXT," +
                 "DEPARTURE_CITY TEXT," +
                 "DESTINATION_CITY TEXT," +
-                "DEPARTURE_DATE TEXT," +
-                "DEPARTURE_TIME TEXT," +
-                "ARRIVAL_DATE TEXT," +
-                "ARRIVAL_TIME TEXT," +
+                "DEPARTURE_DATETIME TEXT," +
+                "ARRIVAL_DATETIME TEXT," +
                 "DURATION TEXT," +
                 "AIRCRAFT_MODEL TEXT," +
                 "CURRENT_RESERVATIONS INTEGER," +
@@ -75,10 +73,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER);
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + FLIGHT);
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RESERVATION);
-//        onCreate(sqLiteDatabase);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USER");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS FLIGHT");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS RESERVATION");
+        onCreate(sqLiteDatabase);
     }
 
     public void insertAdmin(Admin admin) {
@@ -88,7 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("PHONE", admin.getPhoneNumber());
         contentValues.put("FIRST_NAME", admin.getFirstName());
         contentValues.put("LAST_NAME", admin.getLastName());
-        contentValues.put("PASSWORD", admin.getPassword());
+        contentValues.put("HASHED_PASSWORD", admin.getHashedPassword());
         contentValues.put("ROLE", "Admin");
 
         sqLiteDatabase.insert("USER", null, contentValues);
@@ -101,7 +99,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("PHONE", passenger.getPhoneNumber());
         contentValues.put("FIRST_NAME", passenger.getFirstName());
         contentValues.put("LAST_NAME", passenger.getLastName());
-        contentValues.put("PASSWORD", passenger.getPassword());
+        contentValues.put("HASHED_PASSWORD", passenger.getHashedPassword());
         contentValues.put("ROLE", "Passenger");
         contentValues.put("PASSPORT_NUMBER", passenger.getPassportNumber());
         contentValues.put("PASSPORT_ISSUE_DATE", passenger.getPassportIssueDate().toString()); // Convert to String or appropriate format
@@ -114,16 +112,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert("USER", null, contentValues);
     }
 
-    public void insertFlight(Flight flight) {
+    public int insertFlight(Flight flight) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put("FLIGHT_NUMBER", flight.getFlightNumber());
         contentValues.put("DEPARTURE_CITY", flight.getDepartureCity());
         contentValues.put("DESTINATION_CITY", flight.getDestinationCity());
-        contentValues.put("DEPARTURE_DATE", flight.getDepartureDate().toString());
-        contentValues.put("DEPARTURE_TIME", flight.getDepartureTime().toString());
-        contentValues.put("ARRIVAL_DATE", flight.getArrivalDate().toString());
-        contentValues.put("ARRIVAL_TIME", flight.getArrivalTime().toString());
+        contentValues.put("DEPARTURE_DATETIME", flight.getDepartureDateTime().toString());
+        contentValues.put("ARRIVAL_DATETIME", flight.getArrivalDateTime().toString());
         contentValues.put("DURATION", flight.getDuration());
         contentValues.put("AIRCRAFT_MODEL", flight.getAircraftModel());
         contentValues.put("CURRENT_RESERVATIONS", flight.getCurrentReservations());
@@ -135,7 +132,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("PRICE_EXTRA_BAGGAGE", flight.getPriceExtraBaggage());
         contentValues.put("IS_RECURRENT", flight.getIsRecurrent());
 
-        sqLiteDatabase.insert("FLIGHT", null, contentValues);
+        long id = sqLiteDatabase.insert("FLIGHT", null, contentValues);
+        sqLiteDatabase.close();
+
+        return (int) id;
     }
 
     public void insertReservation(Reservation reservation) {
@@ -147,6 +147,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("RESERVATION_STATUS", reservation.getStatus());
 
         sqLiteDatabase.insert("RESERVATION", null, contentValues);
+    }
+
+    public void clearFlightTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM FLIGHT"); // Clears all the records in the table
+        db.execSQL("VACUUM");
+        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = 'FLIGHT'");
+        db.close();
     }
 
     public Cursor getAllFlights() {
@@ -169,16 +177,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM USER WHERE  ROLE =?", new String[]{role});
     }
 
+    public Cursor getUsersByEmail(String email) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM USER WHERE  EMAIL =?", new String[]{email});
+    }
+
     public void updateFlight(Flight flight) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("FLIGHT_NUMBER", flight.getFlightNumber());
         contentValues.put("DEPARTURE_CITY", flight.getDepartureCity());
         contentValues.put("DESTINATION_CITY", flight.getDestinationCity());
-        contentValues.put("DEPARTURE_DATE", flight.getDepartureDate().toString());
-        contentValues.put("DEPARTURE_TIME", flight.getDepartureTime().toString());
-        contentValues.put("ARRIVAL_DATE", flight.getArrivalDate().toString());
-        contentValues.put("ARRIVAL_TIME", flight.getArrivalTime().toString());
+        contentValues.put("DEPARTURE_DATETIME", flight.getDepartureDateTime().toString());
+        contentValues.put("ARRIVAL_DATETIME", flight.getArrivalDateTime().toString());
         contentValues.put("DURATION", flight.getDuration());
         contentValues.put("AIRCRAFT_MODEL", flight.getAircraftModel());
         contentValues.put("CURRENT_RESERVATIONS", flight.getCurrentReservations());
@@ -201,8 +212,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Cursor getFilteredFlights(String departureCity, String destinationCity, String departureDate, String arrivalDate) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM FLIGHT WHERE DEPARTURE_CITY = ? AND DESTINATION_CITY = ? AND DEPARTURE_DATE = ? AND ARRIVAL_DATE = ?";
+        String query = "SELECT * FROM FLIGHT WHERE DEPARTURE_CITY = ? AND DESTINATION_CITY = ? AND DEPARTURE_DATETIME = ? AND ARRIVAL_DATETIME = ?";
         return sqLiteDatabase.rawQuery(query, new String[]{departureCity, destinationCity, departureDate, arrivalDate});
+    }
+
+    public Cursor getLatestFlight() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM FLIGHT ORDER BY FLIGHT_ID DESC LIMIT 1";
+        return sqLiteDatabase.rawQuery(query, null);
+    }
+
+    public Cursor getClosestFiveFlights() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        String query = "SELECT * FROM FLIGHT " +
+                "WHERE DEPARTURE_DATETIME > DATETIME('now') " +
+                "ORDER BY DEPARTURE_DATETIME ASC " +
+                "LIMIT 5";
+
+        return sqLiteDatabase.rawQuery(query, null);
     }
 
     public Cursor getReservationsByFlight(String flightNumber) {
@@ -211,10 +239,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery(query, new String[]{flightNumber});
     }
 
-    public boolean checkUserCredentials(String email, String password) {
+    public boolean checkUserCredentials(String email, String hashedPassword) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM USER WHERE EMAIL = ? AND PASSWORD = ?";
-        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{email, password});
+        String query = "SELECT * FROM USER WHERE EMAIL = ? AND HASHED_PASSWORD = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{email, hashedPassword});
 
         if (cursor.moveToFirst()) {
             cursor.close();
@@ -223,6 +251,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             cursor.close();
             return false;
         }
+    }
+
+    public boolean doesFlightExist(String flightNumber) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT FLIGHT_ID FROM FLIGHT WHERE FLIGHT_NUMBER = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{flightNumber});
+
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        return exists;
     }
 }
 

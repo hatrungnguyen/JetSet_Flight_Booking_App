@@ -17,7 +17,7 @@
         android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="16dp"
+        android:paddingTop="4dp"
         android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,23 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/offWhite"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,157 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <!-- First Name Section -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="start">
-
-                <TextView
-                    android:id="@+id/textFirst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="First Name"
-                    android:textColor="@color/darkBlue"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:ems="5"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Enter First Name"
-                    android:inputType="text"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Last Name Section -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="start">
-
-                <TextView
-                    android:id="@+id/textLast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Last Name"
-                    android:textColor="@color/darkBlue"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:ems="5"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Enter Last Name"
-                    android:inputType="text"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Email Address"
-            android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Phone Number"
-            android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editPhone"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Phone Number"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Password"
-            android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Confirm Password"
-            android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Password Again"
-            android:inputType="textPassword"
-            android:textSize="14sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
 
     <LinearLayout

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sign_up_passenger_second"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/offWhite"
+    tools:context=".Fragments.PassengerSecondFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Passport Number"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editPassportNumber"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Enter Passport Number"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- First Name Section -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textFirst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Issue Date"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:focusable="false"
+                    android:ems="5"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Enter Issue Date"
+                    android:inputType="date"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Last Name Section -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textLast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Issue Place"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:ems="5"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Enter Last Name"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- First Name Section -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textExpiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Expiry Date"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextDate2"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:ems="5"
+                    android:fontFamily="@font/poppins_medium"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:textSize="14sp"
+                    android:hint="Enter Expiry Date"
+                    android:inputType="date" />
+
+            </LinearLayout>
+
+            <!-- Last Name Section -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Food Preference"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:ems="5"
+                    android:popupBackground="@drawable/rounded_popup" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date of Birth"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextDate3"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Enter Date of Birth"
+            android:inputType="date"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Nationality"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</FrameLayout>

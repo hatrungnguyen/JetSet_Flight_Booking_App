@@ -1,4 +1,49 @@
 package edu.birzeit.jetset.activities;
 
-public class RetrievalFailedActivity {
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import edu.birzeit.jetset.R;
+import edu.birzeit.jetset.tasks.ConnectionAsyncTask;
+
+
+public class RetrievalFailedActivity extends AppCompatActivity implements ConnectionAsyncTask.TaskCallback{
+    Button buttonRetry;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_retrieval_failed);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.retrieval_failed), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        buttonRetry = findViewById(R.id.buttonRetry);
+        buttonRetry.setOnClickListener(v -> {
+            ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(RetrievalFailedActivity.this);
+            connectionAsyncTask.execute("https://api.mocki.io/v2/pk3l0h7g");
+        });
+    }
+
+    @Override
+    public void onTaskSuccess(String result) {
+        Intent intent = new Intent(RetrievalFailedActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onTaskFailure() {
+        Toast.makeText(this, "Retry failed. Please check your connection.", Toast.LENGTH_SHORT).show();
+    }
 }

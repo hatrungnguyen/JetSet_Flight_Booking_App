@@ -7,34 +7,32 @@ public class Flight {
     private String flightNumber;
     private String departureCity;
     private String destinationCity;
-    private Date departureDate;
-    private Date departureTime;
-    private Date arrivalDate;
-    private Date arrivalTime;
+    private String departureDateTime;
+    private String arrivalDateTime;
     private String duration;
     private String aircraftModel;
     private int currentReservations;
     private int maxSeats;
     private int missedFlights;
-    private Date bookingOpenDate;
+    private String bookingOpenDate;
     private double priceEconomy;
     private double priceBusiness;
     private double priceExtraBaggage;
     private String isRecurrent; // e.g., "None", "Daily", "Weekly"
 
+    public Flight(){}
+
     // Constructor
-    public Flight(int flightId, String flightNumber, String departureCity, String destinationCity, Date departureDate, Date departureTime, Date arrivalDate,
-                  Date arrivalTime, String duration, String aircraftModel, int currentReservations, int maxSeats, int missedFlights,
-                  Date bookingOpenDate, double priceEconomy, double priceBusiness, double priceExtraBaggage, String isRecurrent) {
+    public Flight(int flightId, String flightNumber, String departureCity, String destinationCity, String departureDateTime, String arrivalDateTime,
+                   String duration, String aircraftModel, int currentReservations, int maxSeats, int missedFlights,
+                  String bookingOpenDate, double priceEconomy, double priceBusiness, double priceExtraBaggage, String isRecurrent) {
 
         this.flightId = flightId;
         this.flightNumber = flightNumber;
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
-        this.departureDate = departureDate;
-        this.departureTime = departureTime;
-        this.arrivalDate = arrivalDate;
-        this.arrivalTime = arrivalTime;
+        this.departureDateTime = departureDateTime;
+        this.arrivalDateTime = arrivalDateTime;
         this.duration = duration;
         this.aircraftModel = aircraftModel;
         this.currentReservations = currentReservations;
@@ -79,36 +77,20 @@ public class Flight {
         this.destinationCity = destinationCity;
     }
 
-    public Date getDepartureDate() {
-        return departureDate;
+    public String getDepartureDateTime() {
+        return departureDateTime;
     }
 
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
+    public void setDepartureDateTime(String departureDateTime) {
+        this.departureDateTime = departureDateTime;
     }
 
-    public Date getDepartureTime() {
-        return departureTime;
+    public String getArrivalDateTime() {
+        return arrivalDateTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public Date getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public Date getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(Date arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrivalDateTime(String arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
     }
 
     public String getDuration() {
@@ -151,11 +133,11 @@ public class Flight {
         this.missedFlights = missedFlights;
     }
 
-    public Date getBookingOpenDate() {
+    public String getBookingOpenDate() {
         return bookingOpenDate;
     }
 
-    public void setBookingOpenDate(Date bookingOpenDate) {
+    public void setBookingOpenDate(String bookingOpenDate) {
         this.bookingOpenDate = bookingOpenDate;
     }
 
@@ -189,5 +171,27 @@ public class Flight {
 
     public void setIsRecurrent(String isRecurrent) {
         this.isRecurrent = isRecurrent;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightId=" + flightId +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", departureCity='" + departureCity + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", departureDateTime=" + departureDateTime +
+                ", arrivalDateTime=" + arrivalDateTime +
+                ", duration='" + duration + '\'' +
+                ", aircraftModel='" + aircraftModel + '\'' +
+                ", currentReservations=" + currentReservations +
+                ", maxSeats=" + maxSeats +
+                ", missedFlights=" + missedFlights +
+                ", bookingOpenDate=" + bookingOpenDate +
+                ", priceEconomy=" + priceEconomy +
+                ", priceBusiness=" + priceBusiness +
+                ", priceExtraBaggage=" + priceExtraBaggage +
+                ", isRecurrent='" + isRecurrent + '\'' +
+                '}';
     }
 }

@@ -7,4 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity">
 
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

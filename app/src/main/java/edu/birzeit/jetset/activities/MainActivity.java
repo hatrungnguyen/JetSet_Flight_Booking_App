@@ -1,10 +1,10 @@
 package edu.birzeit.jetset.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,21 +14,32 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.database.DataBaseHelper;
+import edu.birzeit.jetset.database.SharedPrefManager;
+import edu.birzeit.jetset.model.Flight;
+import edu.birzeit.jetset.tasks.ConnectionAsyncTask;
+import edu.birzeit.jetset.tasks.FlightJsonParser;
+import edu.birzeit.jetset.tasks.Hash;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity implements ConnectionAsyncTask.TaskCallback {
+
+    private static final String IS_LOGGED_IN = "IsLoggedIn";
+    private static final String IS_FORCE_CLOSED = "IsForceClosed";
+    private static final String SAVED_EMAIL = "SavedEmail";
     Button signUp;
     Button login;
     EditText email;
     EditText password;
+    ;
+    CheckBox rememberMe;
     DataBaseHelper dataBaseHelper;
-
-    private static final String PREFS_NAME = "JetSetPrefs";
-    private static final String IS_LOGGED_IN = "IsLoggedIn";
-    private static final String IS_FORCE_CLOSED = "IsForceClosed";
-
+    List<Flight> flightsAdded = new ArrayList<Flight>();
+    SharedPrefManager sharedPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,44 +52,59 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
+//        dataBaseHelper.clearFlightTable();
+        sharedPrefManager = SharedPrefManager.getInstance(MainActivity.this);
 
         signUp = findViewById(R.id.buttonSignUp);
         login = findViewById(R.id.buttonLogin);
         email = findViewById(R.id.editEmail);
         password = findViewById(R.id.editPassword);
+        rememberMe = findViewById(R.id.checkBox);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        boolean isLoggedIn = sharedPreferences.getBoolean(IS_LOGGED_IN, false);
-        boolean isForceClosed = sharedPreferences.getBoolean(IS_FORCE_CLOSED, false);
+        boolean isLoggedIn = sharedPrefManager.readBoolean(IS_LOGGED_IN, false);
+        boolean isForceClosed = sharedPrefManager.readBoolean(IS_FORCE_CLOSED, false);
+        String savedEmail = sharedPrefManager.readString(SAVED_EMAIL, "");
+
+        ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
+        connectionAsyncTask.execute("https://api.mocki.io/v2/pk3l0h7g");
+
+        if (!savedEmail.isEmpty()) {
+            email.setText(savedEmail);
+        }
 
         if (isLoggedIn && !isForceClosed) {
-            // If logged in, directly go to HomeActivity
             navigateToHome();
         }
 
+
         login.setOnClickListener(v -> {
             String emailText = email.getText().toString();
-            String passwordText = password.getText().toString();
+            String passwordText = Hash.hashPassword(password.getText().toString());
 
             if (emailText.isEmpty() || passwordText.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Please enter both email and password", Toast.LENGTH_SHORT).show();
+                displayToast("Please enter both email and password");
                 return;
             }
 
             boolean isValidLogin = dataBaseHelper.checkUserCredentials(emailText, passwordText);
 
             if (isValidLogin) {
-                // If the login is successful, navigate to the home screen
-                editor.putBoolean(IS_LOGGED_IN, true);
-                editor.putBoolean(IS_FORCE_CLOSED, false);
-                editor.apply();
+                if (rememberMe.isChecked()) {
+                    sharedPrefManager.writeString(SAVED_EMAIL, emailText);
+                } else {
+                    sharedPrefManager.removeValue(SAVED_EMAIL);
+                }
+
+                sharedPrefManager.writeBoolean(IS_LOGGED_IN, true);
+                sharedPrefManager.writeBoolean(IS_FORCE_CLOSED, true);
+                sharedPrefManager.apply();
 
                 navigateToHome();
             } else {
-                Toast.makeText(MainActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                displayToast("Invalid email or password");
             }
         });
 
@@ -99,10 +125,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(IS_FORCE_CLOSED, true);
-        editor.apply();
+        sharedPrefManager.writeBoolean(IS_FORCE_CLOSED, true);
+        sharedPrefManager.apply();
+    }
+
+
+    private void displayToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTaskSuccess(String result) {
+        displayToast("Connected!");
+        List<Flight> flights = FlightJsonParser.getObjectFromJson(result);
+        Log.d("MainActivity", "onTaskSuccess: " + flights);
+        if (flights == null) {
+            return;
+        } else {
+            for (Flight flight : flights) {
+            if (dataBaseHelper.doesFlightExist(flight.getFlightNumber())) {
+                // Flight exists, update it
+                dataBaseHelper.updateFlight(flight);
+            } else {
+                // Flight does not exist, insert it
+                flight.setFlightId(dataBaseHelper.insertFlight(flight));
+            }
+            flightsAdded.add(flight);
+        }
+        sharedPrefManager.saveFlightList(flightsAdded);
+//        navigateToHome();
+    }
+}
+
+    @Override
+    public void onTaskFailure() {
+        Intent intent = new Intent(MainActivity.this, RetrievalFailedActivity.class);
+        startActivity(intent);
     }
 
 
