@@ -34,6 +34,11 @@ android {
     }
 }
 
+//repositories {
+//    google()
+//    mavenCentral()
+//}
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -42,7 +47,8 @@ dependencies {
     implementation(platform(libs.kotlin.bom))
     implementation(libs.lottie)
     implementation(libs.gson)
-
+    implementation(libs.material.v120alpha03)
+    implementation("com.tbuonomo:dotsindicator:5.0")
     implementation(libs.window)
     implementation(libs.constraintlayout)
     implementation(libs.annotation)

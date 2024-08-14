@@ -3,18 +3,20 @@ package edu.birzeit.jetset.activities;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Lifecycle;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import edu.birzeit.jetset.Fragments.PassengerFirstFragment;
 import edu.birzeit.jetset.Fragments.PassengerSecondFragment;
@@ -23,7 +25,7 @@ import edu.birzeit.jetset.tasks.ZoomOutPageTransformer;
 
 public class SignUpPassengerActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 2;
-    private ViewPager2 mPager;
+    private ViewPager2 viewPager2;
     private FragmentStateAdapter pagerAdapter;
 
     @Override
@@ -37,22 +39,31 @@ public class SignUpPassengerActivity extends AppCompatActivity {
             return insets;
         });
 
-        mPager = findViewById(R.id.viewPager);
+        viewPager2 = findViewById(R.id.viewPager);
+        DotsIndicator dotsIndicator = findViewById(R.id.worm_dots_indicator);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), getLifecycle());
-        mPager.setAdapter(pagerAdapter);
-        mPager.setPageTransformer(new ZoomOutPageTransformer());
+
+        viewPager2.setAdapter(pagerAdapter);
+        viewPager2.setPageTransformer(new ZoomOutPageTransformer());
+        dotsIndicator.setViewPager2(viewPager2);
+
+//        TabLayout tabLayout = new TabLayout(this);
+//        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2,
+//                (tab, position) -> {
+//                    // Customize the tabs if needed
+//                });
 
     }
 
     @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
+        if (viewPager2.getCurrentItem() == 0) {
             // If the user is currently looking at the first step, allow the system to handle the
             // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
         } else {
             // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+            viewPager2.setCurrentItem(viewPager2.getCurrentItem() - 1);
         }
     }
 

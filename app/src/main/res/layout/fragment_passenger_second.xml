@@ -8,7 +8,6 @@
     android:background="@color/offWhite"
     tools:context=".Fragments.PassengerSecondFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,66 +23,56 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
 
-
-
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textView0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Passport Number"
             android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:placeholderText="Enter 9 Digit Number"
+            app:placeholderTextAppearance="@style/PlaceholderTextStyle">
 
-        <EditText
-            android:id="@+id/editPassportNumber"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Passport Number"
-            android:inputType="number"
-            android:textSize="14sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPassportNumber"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Passport Number"
+                android:inputType="number"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAligned="false"
             android:gravity="center"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
-            <!-- First Name Section -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textFirst"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Issue Date"
+                    android:layout_weight="0.45"
                     android:textColor="@color/darkBlue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:placeholderText="D/M/YYYY"
+                    app:placeholderTextAppearance="@style/PlaceholderTextStyle">
 
-                <EditText
-                    android:id="@+id/editTextDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:focusable="false"
-                    android:ems="5"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Enter Issue Date"
-                    android:inputType="date"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:ems="5"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="Issue Date"
+                        android:inputType="date"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Last Name Section -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -95,21 +84,18 @@
                     android:id="@+id/textLast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Issue Place"
                     android:textColor="@color/darkBlue"
                     android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/editLastName"
+                <Spinner
+                    android:id="@+id/spinnerCountry"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:ems="5"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Enter Last Name"
-                    android:inputType="text"
-                    android:textSize="14sp" />
+                    android:minHeight="56dp"
+                    android:popupBackground="@drawable/rounded_popup" />
             </LinearLayout>
 
         </LinearLayout>
@@ -118,42 +104,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAligned="false"
+            android:layout_marginTop="14dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- First Name Section -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/darkBlue"
+                android:textSize="14sp"
+                app:placeholderText="D/M/YYYY"
+                app:placeholderTextAppearance="@style/PlaceholderTextStyle">
 
-                <TextView
-                    android:id="@+id/textExpiry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Expiry Date"
-                    android:textColor="@color/darkBlue"
-                    android:textSize="14sp" />
-
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextDate2"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:ems="5"
                     android:fontFamily="@font/poppins_medium"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:textSize="14sp"
-                    android:hint="Enter Expiry Date"
-                    android:inputType="date" />
+                    android:hint="Expiry Date"
+                    android:inputType="date"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-
-            <!-- Last Name Section -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -165,7 +140,6 @@
                     android:id="@+id/textFood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Food Preference"
                     android:textColor="@color/darkBlue"
@@ -175,33 +149,32 @@
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="48dp"
                     android:ems="5"
+                    android:minHeight="56dp"
                     android:popupBackground="@drawable/rounded_popup" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewPhone"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Date of Birth"
+            android:layout_marginTop="14dp"
             android:textColor="@color/darkBlue"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:placeholderText="D/M/YYYY"
+            app:placeholderTextAppearance="@style/PlaceholderTextStyle">
 
-        <EditText
-            android:id="@+id/editTextDate3"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:focusable="false"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Date of Birth"
-            android:inputType="date"
-            android:textSize="14sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDate3"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Date of Birth"
+                android:inputType="date"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textView3"
@@ -213,15 +186,13 @@
             android:textColor="@color/darkBlue"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/editPassword"
+        <Spinner
+            android:id="@+id/spinnerNationality"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:textSize="14sp" />
+            android:layout_height="60dp"
+            android:ems="5"
+            android:minHeight="60dp"
+            android:popupBackground="@drawable/rounded_popup" />
     </LinearLayout>
 
 

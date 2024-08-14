@@ -71,10 +71,4 @@ public class SharedPrefManager {
         String json = gson.toJson(flights);
         writeString(FLIGHT_LIST_KEY, json);
     }
-
-    public List<Flight> getFlightList() {
-        String json = readString(FLIGHT_LIST_KEY, null);
-        Type type = new TypeToken<ArrayList<Flight>>() {}.getType();
-        return gson.fromJson(json, type);
-    }
 }

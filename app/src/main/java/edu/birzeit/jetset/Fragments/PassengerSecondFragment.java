@@ -1,25 +1,26 @@
 package edu.birzeit.jetset.Fragments;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.model.CustomArrayAdapter;
@@ -30,16 +31,14 @@ import edu.birzeit.jetset.model.CustomArrayAdapter;
  * create an instance of this fragment.
  */
 public class PassengerSecondFragment extends Fragment {
-    private EditText editIssueDate;
-    private EditText editExpiryDate;
-    private EditText editDateOfBirth;
-    private Spinner typeSpinner;
-
+    private static final String DEFAULT_LOCAL = "Palestine";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private TextInputEditText editIssueDate;
+    private TextInputEditText editExpiryDate;
+    private TextInputEditText editDateOfBirth;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -82,31 +81,72 @@ public class PassengerSecondFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_passenger_second, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         editIssueDate = view.findViewById(R.id.editTextDate);
         editExpiryDate = view.findViewById(R.id.editTextDate2);
         editDateOfBirth = view.findViewById(R.id.editTextDate3);
-        typeSpinner = view.findViewById(R.id.spinner);
+        Spinner typeSpinner = view.findViewById(R.id.spinner);
+        Spinner issuePlace = view.findViewById(R.id.spinnerCountry);
+        Spinner nationality = view.findViewById(R.id.spinnerNationality);
 
         String[] types = {"Vegetarian", "Non-Vegetarian", "Vegan", "Pescatarian", "Diabetic", "Halal", "Kosher"};
         ArrayList<String> typesList = new ArrayList<>(List.of(types));
-
         CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), R.layout.spinner_item, typesList, 14);
         typeSpinner.setAdapter(adapter);
 
+        SortedSet<String> countries = new TreeSet<>();
+        for (Locale locale : Locale.getAvailableLocales()) {
+            if (!TextUtils.isEmpty(locale.getDisplayCountry())) {
+                countries.add(locale.getDisplayCountry());
+            }
+        }
 
-        editIssueDate.setOnClickListener(v -> showDatePickerDialog(editIssueDate));
-        editExpiryDate.setOnClickListener(v -> showDatePickerDialog(editExpiryDate));
-        editDateOfBirth.setOnClickListener(v -> showDatePickerDialog(editDateOfBirth));
+        ArrayList<String> countriessList = new ArrayList<>(countries);
+        CustomArrayAdapter adapterCountries = new CustomArrayAdapter(getContext(), R.layout.spinner_item, countriessList, 14);
+        issuePlace.setAdapter(adapterCountries);
+        nationality.setAdapter(adapterCountries);
+
+        Locale defaultLocale = Locale.getDefault();
+        String defaultCountry = defaultLocale.getDisplayCountry();
+        if (!TextUtils.isEmpty(defaultCountry)) {
+            int position = adapterCountries.getPosition(defaultCountry);
+            if (position >= 0) {
+                issuePlace.setSelection(position);
+                nationality.setSelection(position);
+            }
+        }
+
+
+        editIssueDate.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showDatePickerDialog(editIssueDate);
+                v.performClick();
+            }
+            return false;
+        });
+        editExpiryDate.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showDatePickerDialog(editExpiryDate);
+                v.performClick();
+            }
+            return false;
+        });
+        editDateOfBirth.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showDatePickerDialog(editDateOfBirth);
+                v.performClick();
+            }
+            return false;
+        });
     }
 
     private void showDatePickerDialog(final EditText editText) {
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.setOnDateSetListener((year, month, day) -> {
-            // Set the selected date into the EditText.
             String selectedDate = day + "/" + (month + 1) + "/" + year;
             editText.setText(selectedDate);
         });
