@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Passenger extends User {
     private String passportNumber;
-    private Date passportIssueDate;
     private String passportIssuePlace;
-    private Date passportExpirationDate;
+    private String passportIssueDate;
+    private String passportExpiryDate;
+    private String dateOfBirth;
     private String foodPreference;
-    private Date dateOfBirth;
     private String nationality;
 
     public Passenger() {
@@ -16,14 +16,14 @@ public class Passenger extends User {
     }
 
     public Passenger(String email, String phoneNumber, String firstName, String lastName, String password,
-                     String passportNumber, Date passportIssueDate, String passportIssuePlace, Date passportExpirationDate,
-                     String foodPreference, Date dateOfBirth, String nationality) {
+                     String passportNumber, String passportIssueDate, String passportIssuePlace, String passportExpiryDate,
+                     String foodPreference, String dateOfBirth, String nationality) {
 
         super(email, phoneNumber, firstName, lastName, password);
         this.passportNumber = passportNumber;
         this.passportIssueDate = passportIssueDate;
         this.passportIssuePlace = passportIssuePlace;
-        this.passportExpirationDate = passportExpirationDate;
+        this.passportExpiryDate = passportExpiryDate;
         this.foodPreference = foodPreference;
         this.dateOfBirth = dateOfBirth;
         this.nationality = nationality;
@@ -37,11 +37,11 @@ public class Passenger extends User {
         this.passportNumber = passportNumber;
     }
 
-    public Date getPassportIssueDate() {
+    public String getPassportIssueDate() {
         return passportIssueDate;
     }
 
-    public void setPassportIssueDate(Date passportIssueDate) {
+    public void setPassportIssueDate(String passportIssueDate) {
         this.passportIssueDate = passportIssueDate;
     }
 
@@ -53,12 +53,12 @@ public class Passenger extends User {
         this.passportIssuePlace = passportIssuePlace;
     }
 
-    public Date getPassportExpirationDate() {
-        return passportExpirationDate;
+    public String getPassportExpiryDate() {
+        return passportExpiryDate;
     }
 
-    public void setPassportExpirationDate(Date passportExpirationDate) {
-        this.passportExpirationDate = passportExpirationDate;
+    public void setPassportExpiryDate(String passportExpiryDate) {
+        this.passportExpiryDate = passportExpiryDate;
     }
 
     public String getFoodPreference() {
@@ -69,11 +69,11 @@ public class Passenger extends User {
         this.foodPreference = foodPreference;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

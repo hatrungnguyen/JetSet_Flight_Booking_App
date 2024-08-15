@@ -104,7 +104,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("PASSPORT_NUMBER", passenger.getPassportNumber());
         contentValues.put("PASSPORT_ISSUE_DATE", passenger.getPassportIssueDate().toString()); // Convert to String or appropriate format
         contentValues.put("PASSPORT_ISSUE_PLACE", passenger.getPassportIssuePlace());
-        contentValues.put("PASSPORT_EXPIRATION_DATE", passenger.getPassportExpirationDate().toString()); // Convert to String or appropriate format
+        contentValues.put("PASSPORT_EXPIRATION_DATE", passenger.getPassportExpiryDate().toString()); // Convert to String or appropriate format
         contentValues.put("FOOD_PREFERENCE", passenger.getFoodPreference());
         contentValues.put("DATE_OF_BIRTH", passenger.getDateOfBirth().toString()); // Convert to String or appropriate format
         contentValues.put("NATIONALITY", passenger.getNationality());

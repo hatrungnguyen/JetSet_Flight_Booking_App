@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.model.Admin;
@@ -20,12 +22,12 @@ import edu.birzeit.jetset.tasks.Hash;
 
 public class SignUpAdminActivity extends AppCompatActivity {
 
-    EditText editFirstName;
-    EditText editLastName;
-    EditText editEmail;
-    EditText editPhoneNumber;
-    EditText editPassword;
-    EditText editConfirmPassword;
+    TextInputEditText editFirstName;
+    TextInputEditText editLastName;
+    TextInputEditText editEmail;
+    TextInputEditText editPhoneNumber;
+    TextInputEditText editPassword;
+    TextInputEditText editConfirmPassword;
 
     Button buttonContinue;
 
@@ -52,36 +54,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
         buttonContinue = findViewById(R.id.buttonContinue);
         buttonContinue.setOnClickListener(v -> {
             Admin admin = new Admin();
-            boolean validName = validateName(editFirstName.getText().toString());
-            boolean validLastName = validateName(editLastName.getText().toString());
-            boolean validPassword = validatePassword(editPassword.getText().toString());
-            boolean validEmail = validateEmail(editEmail.getText().toString());
-            boolean validPhoneNumber = validatePhoneNumber(editPhoneNumber.getText().toString());
-
-            if (!validName) {
-                Toast.makeText(this, "Please enter a valid first name", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!validLastName) {
-                Toast.makeText(this, "Please enter a valid last name", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!validEmail) {
-                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!validPhoneNumber) {
-                Toast.makeText(this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!validPassword) {
-                Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!editPassword.getText().toString().equals(editConfirmPassword.getText().toString())) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (dataInvalid()) return;
 
             if (dataBaseHelper.getUsersByEmail(editEmail.getText().toString()).getCount() > 0) {
                 Toast.makeText(this, "Admin already exists", Toast.LENGTH_SHORT).show();
@@ -91,7 +64,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
             String hashedPassword = Hash.hashPassword(editPassword.getText().toString());
 
             createAdmin(admin, editEmail.getText().toString(), editPhoneNumber.getText().toString(), editFirstName.getText().toString(),
-                    editLastName.getText().toString(), hashedPassword);
+                        editLastName.getText().toString(), hashedPassword);
 
             dataBaseHelper.insertAdmin(admin);
 
@@ -106,10 +79,53 @@ public class SignUpAdminActivity extends AppCompatActivity {
 
     }
 
-    private boolean validateName(String name) {
+    private boolean dataInvalid() {
+        boolean validName = validateFirstName(editFirstName.getText().toString());
+        boolean validLastName = validateLastName(editLastName.getText().toString());
+        boolean validPassword = validatePassword(editPassword.getText().toString());
+        boolean validEmail = validateEmail(editEmail.getText().toString());
+        boolean validPhoneNumber = validatePhoneNumber(editPhoneNumber.getText().toString());
+
+        if (!validName) {
+            Toast.makeText(this, "Please enter a valid first name", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (!validLastName) {
+            Toast.makeText(this, "Please enter a valid last name", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (!validEmail) {
+            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (!validPhoneNumber) {
+            Toast.makeText(this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (!validPassword) {
+            Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (!editPassword.getText().toString().equals(editConfirmPassword.getText().toString())) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateFirstName(String name) {
         //if name is less than 3 characters, return false
         if (name.length() < 3 || name.length() > 20) {
             editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateLastName(String name) {
+        //if name is less than 3 characters, return false
+        if (name.length() < 3 || name.length() > 20) {
+            editLastName.setError("Name must be at least 3 characters and less than 20 characters");
             return false;
         }
         return true;
@@ -160,12 +176,12 @@ public class SignUpAdminActivity extends AppCompatActivity {
     }
 
 
-    private void createAdmin(Admin admin, String email, String phoneNumber, String firstName, String lastName, String password) {
+    private void createAdmin(Admin admin, String email, String phoneNumber, String firstName, String lastName, String hashedPassword) {
         admin.setEmail(email);
         admin.setPhoneNumber(phoneNumber);
         admin.setFirstName(firstName);
         admin.setLastName(lastName);
-        admin.setHashedPassword(password);
+        admin.setHashedPassword(hashedPassword);
     }
 
 

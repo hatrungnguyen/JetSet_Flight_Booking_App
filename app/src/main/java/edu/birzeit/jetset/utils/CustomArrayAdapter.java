@@ -1,4 +1,4 @@
-package edu.birzeit.jetset.model;
+package edu.birzeit.jetset.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
