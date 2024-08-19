@@ -50,7 +50,6 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     View firstPageView, secondPageView;
     private TextInputEditText editFirstName, editLastName, editEmail, editPhone, editPassword, editConfirmPassword, editPassportNumber, editIssueDate, editExpiryDate, editDateOfBirth;
     private Spinner spinnerCountry, spinnerFoodPreference, spinnerNationality;
-    private Button continueButton;
     private String firstName, lastName, email, phoneNumber, password, confirmPassword, hashedPassword, passportNumber, issuePlace, foodPreference, nationality;
     private Date issueDate, expiryDate, dateOfBirth;
     private DataBaseHelper dataBaseHelper;
@@ -108,7 +107,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
             }
         });
 
-        continueButton = findViewById(R.id.buttonContinue);
+        Button continueButton = findViewById(R.id.buttonContinue);
         continueButton.setOnClickListener(v -> {
             if (!getData()) {
                 return;
@@ -140,7 +139,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void setupCountryAndFoodPreferences(String defaultCountry) {
+    private void setupSpinnersAndDates(String defaultCountry) {
         String[] types = {"Vegetarian", "Non-Vegetarian", "Vegan", "Pescatarian", "Diabetic", "Halal", "Kosher"};
         ArrayList<String> typesList = new ArrayList<>(List.of(types));
         CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.spinner_item, typesList, 14);
@@ -223,7 +222,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
             Locale defaultLocale = Locale.getDefault();
             String defaultCountry = defaultLocale.getDisplayCountry();
 
-            setupCountryAndFoodPreferences(defaultCountry);
+            setupSpinnersAndDates(defaultCountry);
         }
     }
 
@@ -285,65 +284,9 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     }
 
     private boolean isDataInvalid() {
-        boolean validFirstName = validateFirstName();
-        boolean validLastName = validateLastName();
-        boolean validPassword = validatePassword();
-        boolean validEmail = validateEmail();
-        boolean validPhoneNumber = validatePhoneNumber();
-        boolean validPassportNumber = validatePassportNumber();
-        boolean validIssueDate = validateIssueDate();
-        boolean validExpiryDate = validateExpiryDate();
-        boolean validDOB = validateDateOfBirth();
-        boolean validNationality = validateNationality();
-        boolean validFoodPreference = validateFoodPreference();
-        boolean validIssuePlace = validateIssuePlace();
-
-
-        if (!validFirstName) {
-            Toast.makeText(this, "Please enter a valid first name", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validLastName) {
-            Toast.makeText(this, "Please enter a valid last name", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validEmail) {
-            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validPhoneNumber) {
-            Toast.makeText(this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validPassword) {
-            return true;
-        }
-        if (!validPassportNumber) {
-            Toast.makeText(this, "Please enter a valid passport number", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validDOB || !validIssueDate) {
-            Toast.makeText(this, "Please enter a valid date", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validIssuePlace) {
-            Toast.makeText(this, "Please enter a valid issue place", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validExpiryDate) {
-            Toast.makeText(this, "Please make sure expiry date is after issue date", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validFoodPreference) {
-            Toast.makeText(this, "Please enter a valid food preference", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (!validNationality) {
-            Toast.makeText(this, "Please enter a valid nationality", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return false;
+        return !validateFirstName() || !validateLastName() || !validateEmail() || !validatePhoneNumber() || !validatePassword()
+                || !validatePassportNumber() || !validateIssueDate() || !validateExpiryDate() || !validateDateOfBirth()
+                || !validateNationality() || !validateFoodPreference() || !validateIssuePlace();
     }
 
 //    @Override
@@ -438,6 +381,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean validatePassportNumber() {
         if (TextUtils.isEmpty(passportNumber) || passportNumber.length() != 9 || !passportNumber.matches("\\d{9}")) {
             editPassportNumber.setError("Invalid passport number. It should be 9 digits.");
+            Toast.makeText(this, "Please enter a valid passport number", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -446,6 +390,8 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean validateIssueDate() {
         if (TextUtils.isEmpty(editIssueDate.getText().toString())) {
             editIssueDate.setError("Issue date cannot be empty.");
+            Toast.makeText(this, "Please enter a valid issue date", Toast.LENGTH_SHORT).show();
+
             return false;
         }
         return true;
@@ -454,10 +400,13 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean validateExpiryDate() {
         if (TextUtils.isEmpty(editExpiryDate.getText().toString())) {
             editExpiryDate.setError("Expiry date cannot be empty.");
+            Toast.makeText(this, "Please enter a valid expiry date", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!isDateAfter(issueDate, expiryDate)) {
             editExpiryDate.setError("Expiry date should be after issue date.");
+            Toast.makeText(this, "Please make sure expiry date is after issue date", Toast.LENGTH_SHORT).show();
+
             return false;
 
         }
@@ -467,31 +416,48 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean validateDateOfBirth() {
         if (TextUtils.isEmpty(editDateOfBirth.getText().toString())) {
             editDateOfBirth.setError("Date of birth cannot be empty.");
+            Toast.makeText(this, "Please enter a valid date of birth", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (dateOfBirth.after(new Date())) {
             editDateOfBirth.setError("Date of birth cannot be in the future.");
+            Toast.makeText(this, "Please enter a valid date of birth", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
-    private boolean validateNationality() {
-        return !TextUtils.isEmpty(nationality);
-    }
-
-    private boolean validateFoodPreference() {
-        return !TextUtils.isEmpty(foodPreference);
-    }
-
-    private boolean validateIssuePlace() {
-        return !TextUtils.isEmpty(issuePlace);
-    }
-
-
     private boolean isDateAfter(Date startDate, Date endDate) {
         return endDate != null && startDate != null && endDate.after(startDate);
     }
+    private boolean validateNationality() {
+        if (TextUtils.isEmpty(nationality)) {
+            editDateOfBirth.setError("Nationality cannot be empty.");
+            Toast.makeText(this, "Please enter a valid nationality", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateFoodPreference() {
+        if (TextUtils.isEmpty(foodPreference)) {
+            editDateOfBirth.setError("Food preference cannot be empty.");
+            Toast.makeText(this, "Please enter a valid food preference", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateIssuePlace() {
+        if (TextUtils.isEmpty(issuePlace)) {
+            editIssueDate.setError("Issue place cannot be empty.");
+            Toast.makeText(this, "Please enter a valid issue place", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+
 
     private void showDatePickerDialog(final EditText editText) {
         DatePickerFragment newFragment = new DatePickerFragment();

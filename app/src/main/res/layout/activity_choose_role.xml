@@ -66,7 +66,7 @@
             android:layout_marginTop="14dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Choose Your Role"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/darkPurple"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -91,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <RadioButton
                 android:id="@+id/radio_admin"
@@ -101,7 +102,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:minHeight="48dp"
                 android:text="Admin"
-                android:textColor="@color/darkBlue"
+                android:textColor="@color/darkPurple"
                 android:textSize="16sp" />
 
             <RadioButton
@@ -112,7 +113,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:minHeight="48dp"
                 android:text="Passenger"
-                android:textColor="@color/darkBlue"
+                android:textColor="@color/darkPurple"
                 android:textSize="16sp" />
 
         </RadioGroup>
@@ -138,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/darkBlue"
+            android:backgroundTint="@color/darkPurple"
             android:fontFamily="@font/poppins_bold"
             android:padding="12dp"
             android:text="Continue"

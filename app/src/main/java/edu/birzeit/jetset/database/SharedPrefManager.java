@@ -2,13 +2,9 @@ package edu.birzeit.jetset.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.birzeit.jetset.model.Flight;
@@ -16,11 +12,13 @@ import edu.birzeit.jetset.model.Flight;
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "JetSetPrefs";
     private static final String FLIGHT_LIST_KEY = "FlightList";
+    private static final String USER_NAME_KEY = "UserName";
     private static final int SHARED_PREF_PRIVATE = Context.MODE_PRIVATE;
+    private static final String TOOLBAR_TITLE_KEY = "ToolbarTitle";
     private static SharedPreferences sharedPreferences = null;
     private static SharedPrefManager ourInstance = null;
-    private SharedPreferences.Editor editor;
-    private Gson gson = new Gson();
+    private final SharedPreferences.Editor editor;
+    private final Gson gson = new Gson();
 
     private SharedPrefManager(Context context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, SHARED_PREF_PRIVATE);
@@ -35,18 +33,18 @@ public class SharedPrefManager {
         return ourInstance;
     }
 
-    public boolean writeString(String key, String value) {
+    public void writeString(String key, String value) {
         editor.putString(key, value);
-        return editor.commit();
+        editor.commit();
     }
 
     public String readString(String key, String defaultValue) {
         return sharedPreferences.getString(key, defaultValue);
     }
 
-    public boolean writeBoolean(String key, Boolean value) {
+    public void writeBoolean(String key, Boolean value) {
         editor.putBoolean(key, value);
-        return editor.commit();
+        editor.commit();
     }
 
     public Boolean readBoolean(String key, Boolean defaultValue) {
@@ -63,12 +61,29 @@ public class SharedPrefManager {
         editor.commit();
     }
 
-    public void apply(){
+    public void apply() {
         editor.apply();
     }
 
     public void saveFlightList(List<Flight> flights) {
         String json = gson.toJson(flights);
         writeString(FLIGHT_LIST_KEY, json);
+    }
+
+    public void saveUserName(String userName) {
+        writeString(USER_NAME_KEY, userName);
+    }
+
+    public String getUserName() {
+        return sharedPreferences.getString(USER_NAME_KEY, "");
+    }
+
+    public void writeToolbarTitle(String title) {
+        editor.putString(TOOLBAR_TITLE_KEY, title);
+        editor.commit();
+    }
+
+    public String readToolbarTitle() {
+        return sharedPreferences.getString(TOOLBAR_TITLE_KEY, "Home"); // Default title is "Home"
     }
 }

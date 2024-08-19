@@ -5,7 +5,7 @@
     android:id="@+id/retrieval_failed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBlue"
+    android:background="@color/darkPurple"
     tools:context=".activities.MainActivity">
 
 

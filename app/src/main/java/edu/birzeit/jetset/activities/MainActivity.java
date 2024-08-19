@@ -31,14 +31,15 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
     private static final String IS_LOGGED_IN = "IsLoggedIn";
     private static final String IS_FORCE_CLOSED = "IsForceClosed";
     private static final String SAVED_EMAIL = "SavedEmail";
+    private static final String USER_NAME_KEY = "UserName";
+    private static final String REMEMBER_ME = "RememberMe";
     Button signUp;
     Button login;
     EditText email;
     EditText password;
-    ;
     CheckBox rememberMe;
     DataBaseHelper dataBaseHelper;
-    List<Flight> flightsAdded = new ArrayList<Flight>();
+    List<Flight> flightsAdded = new ArrayList<>();
     SharedPrefManager sharedPrefManager;
 
     @Override
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
         connectionAsyncTask.execute("https://api.mocki.io/v2/pk3l0h7g");
 
-        if (!savedEmail.isEmpty()) {
+        if (sharedPrefManager.readBoolean(REMEMBER_ME, false) && !savedEmail.isEmpty()) {
             email.setText(savedEmail);
         }
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
             navigateToHome();
         }
 
-
+//        navigateToHome();
         login.setOnClickListener(v -> {
             String emailText = email.getText().toString();
             String passwordText = Hash.hashPassword(password.getText().toString());
@@ -92,12 +93,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
             boolean isValidLogin = dataBaseHelper.checkUserCredentials(emailText, passwordText);
 
             if (isValidLogin) {
-                if (rememberMe.isChecked()) {
-                    sharedPrefManager.writeString(SAVED_EMAIL, emailText);
-                } else {
-                    sharedPrefManager.removeValue(SAVED_EMAIL);
-                }
+                sharedPrefManager.writeBoolean(REMEMBER_ME, rememberMe.isChecked());
 
+                sharedPrefManager.writeString(SAVED_EMAIL, emailText);
+                String userName = getUserNameFromDatabase(emailText);
+
+                sharedPrefManager.writeString(USER_NAME_KEY, userName);
                 sharedPrefManager.writeBoolean(IS_LOGGED_IN, true);
                 sharedPrefManager.writeBoolean(IS_FORCE_CLOSED, true);
                 sharedPrefManager.apply();
@@ -115,8 +116,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
 
     }
 
+    private String getUserNameFromDatabase(String email) {
+        try (DataBaseHelper dataBaseHelper = new DataBaseHelper(this)) {
+            return dataBaseHelper.getUserName(email);
+        }
+    }
+
     private void navigateToHome() {
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
         startActivity(intent);
         finish();  // Optionally finish the login activity so the user can't go back
     }
@@ -139,23 +146,21 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         displayToast("Connected!");
         List<Flight> flights = FlightJsonParser.getObjectFromJson(result);
         Log.d("MainActivity", "onTaskSuccess: " + flights);
-        if (flights == null) {
-            return;
-        } else {
+        if (flights != null) {
             for (Flight flight : flights) {
-            if (dataBaseHelper.doesFlightExist(flight.getFlightNumber())) {
-                // Flight exists, update it
-                dataBaseHelper.updateFlight(flight);
-            } else {
-                // Flight does not exist, insert it
-                flight.setFlightId(dataBaseHelper.insertFlight(flight));
+                if (dataBaseHelper.doesFlightExist(flight.getFlightNumber())) {
+                    // Flight exists, update it
+                    dataBaseHelper.updateFlight(flight);
+                } else {
+                    // Flight does not exist, insert it
+                    flight.setFlightId(dataBaseHelper.insertFlight(flight));
+                }
+                flightsAdded.add(flight);
             }
-            flightsAdded.add(flight);
-        }
-        sharedPrefManager.saveFlightList(flightsAdded);
+            sharedPrefManager.saveFlightList(flightsAdded);
 //        navigateToHome();
+        }
     }
-}
 
     @Override
     public void onTaskFailure() {

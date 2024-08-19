@@ -65,7 +65,7 @@
             android:layout_marginTop="14dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Fill Your Information"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/darkPurple"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:dotsColor="@color/darkBlue"
+        app:dotsColor="@color/darkPurple"
         app:dotsCornerRadius="6dp"
         app:dotsSize="12dp"
         app:dotsSpacing="4dp"
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/darkBlue"
+            android:backgroundTint="@color/darkPurple"
             android:fontFamily="@font/poppins_bold"
             android:padding="12dp"
             android:text="Continue"
