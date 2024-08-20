@@ -39,10 +39,10 @@ import edu.birzeit.jetset.utils.CustomArrayAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FlightDetailsFragment#newInstance} factory method to
+ * Use the {@link FlightDetailsAdminFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FlightDetailsFragment extends Fragment {
+public class FlightDetailsAdminFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,7 +68,7 @@ public class FlightDetailsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FlightDetailsFragment() {
+    public FlightDetailsAdminFragment() {
         // Required empty public constructor
     }
 
@@ -81,8 +81,8 @@ public class FlightDetailsFragment extends Fragment {
      * @return A new instance of fragment FlightDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FlightDetailsFragment newInstance(String param1, String param2) {
-        FlightDetailsFragment fragment = new FlightDetailsFragment();
+    public static FlightDetailsAdminFragment newInstance(String param1, String param2) {
+        FlightDetailsAdminFragment fragment = new FlightDetailsAdminFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -103,7 +103,7 @@ public class FlightDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_flight_details, container, false);
+        return inflater.inflate(R.layout.fragment_flight_details_admin, container, false);
     }
 
     @Override

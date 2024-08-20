@@ -11,6 +11,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
+        multiDexEnabled = true
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -48,9 +49,11 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.gson)
     implementation(libs.material.v120alpha03)
-    implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation(libs.dotsindicator)
+    implementation(libs.ticketview)
     implementation(libs.window)
     implementation(libs.constraintlayout)
+    implementation(libs.multidex)
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)

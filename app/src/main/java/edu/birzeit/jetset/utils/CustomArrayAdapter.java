@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.List;
@@ -21,11 +22,7 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
         this.fontSize = fontSize;
     }
 
-    public void setFontSize(float fontSize) {
-        this.fontSize = fontSize;
-        notifyDataSetChanged(); // Refresh the view to apply new font size
-    }
-
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -50,6 +47,7 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
             textView.setTextSize(fontSize);
             textView.setTypeface(ResourcesCompat.getFont(getContext(), R.font.poppins_medium));
             textView.setText(getItem(position));
+            textView.setPadding(16, 4, 16, 4);
         }
         return convertView;
     }

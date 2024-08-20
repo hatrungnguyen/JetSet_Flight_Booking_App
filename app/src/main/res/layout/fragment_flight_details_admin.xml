@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/offWhite"
-    tools:context=".Fragments.FlightDetailsFragment"
+    tools:context=".Fragments.FlightDetailsAdminFragment"
     tools:ignore="HardcodedText">
 
     <ScrollView
@@ -147,7 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:baselineAligned="false" android:orientation="horizontal">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
@@ -205,7 +206,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:baselineAligned="false" android:orientation="horizontal">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
@@ -247,7 +249,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:baselineAligned="false" android:orientation="horizontal">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
@@ -266,10 +269,44 @@
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Frequency"
+                        android:textColor="@color/darkPurple"
+                        android:textSize="14sp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerIsRecurrent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:ems="5"
+                        android:minHeight="60dp"
+                        android:popupBackground="@drawable/rounded_popup" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     app:placeholderText="Price per extra baggage"
                     app:placeholderTextAppearance="@style/PlaceholderTextStyle">
@@ -279,22 +316,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:hint="Extra Baggage Price"
+                        android:hint="Extra Baggage"
                         android:inputType="numberDecimal"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:baselineAligned="false" android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     app:placeholderText="Economy class price"
                     app:placeholderTextAppearance="@style/PlaceholderTextStyle">
@@ -334,7 +364,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:baselineAligned="false" android:orientation="horizontal">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -381,22 +412,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Frequency"
-                android:textColor="@color/darkPurple"
-                android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/spinnerIsRecurrent"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:ems="5"
-                android:minHeight="60dp"
-                android:popupBackground="@drawable/rounded_popup" />
         </LinearLayout>
 
     </ScrollView>
@@ -422,31 +438,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonSave"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/pink"
-                android:fontFamily="@font/poppins_bold"
-                android:padding="12dp"
-                android:text="Save"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/darkPurple"
-                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/buttonDelete"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/darkPurple"
@@ -456,6 +455,23 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/pink"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="12dp"
+                android:text="Save"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/darkPurple"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

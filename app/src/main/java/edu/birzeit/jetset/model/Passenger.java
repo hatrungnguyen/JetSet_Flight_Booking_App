@@ -1,7 +1,5 @@
 package edu.birzeit.jetset.model;
 
-import java.util.Date;
-
 public class Passenger extends User {
     private String passportNumber;
     private String passportIssuePlace;

@@ -23,7 +23,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import edu.birzeit.jetset.Fragments.AllFlightsFragment;
 import edu.birzeit.jetset.Fragments.CreateFlightFragment;
-import edu.birzeit.jetset.Fragments.EditFlightsFragment;
 import edu.birzeit.jetset.Fragments.EditProfileAdminFragment;
 import edu.birzeit.jetset.Fragments.FlightsArchiveFragment;
 import edu.birzeit.jetset.Fragments.FlightsBasedOnBookingFragment;
@@ -34,6 +33,7 @@ import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
 public class AdminHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String IS_LOGGED_IN = "IsLoggedIn";
     public TextView toolbarTitle;
     SharedPrefManager sharedPrefManager;
     private DrawerLayout drawerLayout;
@@ -88,7 +88,6 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
 
-//        Toast.makeText(this, "Selected: " + item.getTitle(), Toast.LENGTH_SHORT).show();
         String title = "Home"; // Default title
         Fragment selectedFragment = null;
 
@@ -98,9 +97,6 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
         } else if (itemId == R.id.nav_create_flight) {
             selectedFragment = new CreateFlightFragment();
             title = "Create Flight";
-        } else if (itemId == R.id.nav_edit_flights) {
-            selectedFragment = new EditFlightsFragment();
-            title = "Edit Flights";
         } else if (itemId == R.id.nav_view_reservations) {
             selectedFragment = new ReservationsOnFlightsFragment();
             title = "Reservations";
@@ -118,6 +114,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
             title = "Edit Profile";
         } else if (itemId == R.id.nav_logout) {
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+            sharedPrefManager.writeBoolean(IS_LOGGED_IN, false);
             Intent intent = new Intent(AdminHomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -152,11 +149,5 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private String getUserNameFromSharedPreferences() {
         SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(this);
         return sharedPrefManager.getUserName();
-    }
-
-    private String getUserNameFromDatabase(String email) {
-        try (DataBaseHelper dataBaseHelper = new DataBaseHelper(this)) {
-            return dataBaseHelper.getUserName(email);
-        }
     }
 }

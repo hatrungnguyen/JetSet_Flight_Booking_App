@@ -2,21 +2,46 @@ package edu.birzeit.jetset.model;
 
 public class Reservation {
     private int reservationId;
-    private String flightNumber;
+    private String flightId;
     private String passengerEmail;
-    private String seatNumber;
-    private String status;
+    private String flightClass;
+    private String numOfExtraBags;
+    private String foodPreference;
+    private double totalPrice;
 
-    // Constructor
-    public Reservation(int reservationId, String flightNumber, String passengerEmail, String seatNumber, String status) {
-        this.reservationId = reservationId;
-        this.flightNumber = flightNumber;
-        this.passengerEmail = passengerEmail;
-        this.seatNumber = seatNumber;
-        this.status = status;
+    public Reservation() {
     }
 
-    // Getter and Setter methods
+    public Reservation(int reservationId, String flightId, String passengerEmail, String flightClass, String numOfExtraBags) {
+        this.reservationId = reservationId;
+        this.flightId = flightId;
+        this.passengerEmail = passengerEmail;
+        this.flightClass = flightClass;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getFoodPreference() {
+        return foodPreference;
+    }
+
+    public void setFoodPreference(String foodPreference) {
+        this.foodPreference = foodPreference;
+    }
+
+    public String getNumOfExtraBags() {
+        return numOfExtraBags;
+    }
+
+    public void setNumOfExtraBags(String numOfExtraBags) {
+        this.numOfExtraBags = numOfExtraBags;
+    }
 
     public int getReservationId() {
         return reservationId;
@@ -26,12 +51,12 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
+    public String getFlightId() {
+        return flightId;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
     }
 
     public String getPassengerEmail() {
@@ -42,19 +67,11 @@ public class Reservation {
         this.passengerEmail = passengerEmail;
     }
 
-    public String getSeatNumber() {
-        return seatNumber;
+    public String getFlightClass() {
+        return flightClass;
     }
 
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setFlightClass(String flightClass) {
+        this.flightClass = flightClass;
     }
 }

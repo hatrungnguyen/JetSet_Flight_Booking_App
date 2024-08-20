@@ -13,35 +13,20 @@
             android:title="Home" />
     </group>
 
-    <group android:id="@+id/nav_group2">
-
-        <item
-            android:id="@+id/nav_create_flight"
-            android:title="Create Flight" />
-
-        <item
-            android:id="@+id/nav_edit_flights"
-            android:icon="@drawable/edit"
-            android:title="Edit Flights" />
-
-    </group>
-    <group android:id="@+id/nav_group3">
-        <item
-            android:id="@+id/nav_view_reservations"
-            android:title="Reservations on Flights" />
+    <group
+        android:id="@+id/nav_group2"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_view_all_flights"
             android:icon="@drawable/view_list"
             android:title="All Flights" />
-
         <item
-            android:id="@+id/nav_view_open"
-            android:title="Flights Based on Booking" />
+            android:id="@+id/nav_my_reservations"
+            android:icon="@drawable/reserve_horizontal"
+            android:title="My Reservations" />
 
-        <item
-            android:id="@+id/nav_view_archive"
-            android:title="Flights Archive" />
+
     </group>
 
     <group

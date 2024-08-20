@@ -133,7 +133,7 @@ public class CreateFlightFragment extends Fragment {
                          departureDateTime.getTime(), arrivalDateTime.getTime(), durationTime.getTime(), maxNumOfSeats, extraBaggagePrice, economyPrice, businessPrice, isRecurrentStr);
 
 
-            if (dataBaseHelper.doesFlightExist(flight.getFlightNumber())) {
+            if (dataBaseHelper.doesFlightExist(String.valueOf(flight.getFlightId()))) {
                 dataBaseHelper.updateFlight(flight);
                 Toast.makeText(getContext(), "Flight Already Exists. Updated Successfully", Toast.LENGTH_SHORT).show();
                 return;
@@ -436,30 +436,5 @@ public class CreateFlightFragment extends Fragment {
         } else {
             return true;
         }
-    }
-
-
-    private void showDatePickerDialog(final EditText editText) {
-        DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.setOnDateSetListener((year, month, day) -> {
-            String selectedDate = day + "/" + (month + 1) + "/" + year;
-            editText.setText(selectedDate);
-        });
-        newFragment.show(this.getParentFragmentManager(), "datePicker");
-    }
-
-    private void showTimePickerDialog(final EditText editText) {
-        final Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                getContext(),
-                (view, selectedHour, selectedMinute) -> {
-                    String formattedTime = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
-                    editText.setText(formattedTime);
-                }, hour, minute, true
-        );
-        timePickerDialog.show();
     }
 }

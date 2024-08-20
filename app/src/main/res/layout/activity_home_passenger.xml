@@ -54,7 +54,7 @@
         app:itemIconTint="@color/lavender"
         app:itemTextColor="@color/lavender"
         app:itemVerticalPadding="0dp"
-        app:menu="@menu/nav_menu_admin"
+        app:menu="@menu/nav_menu_passenger"
         app:subheaderInsetEnd="0dp"
         app:subheaderInsetStart="0dp" />
 

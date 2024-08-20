@@ -51,16 +51,6 @@ public class SharedPrefManager {
         return sharedPreferences.getBoolean(key, defaultValue);
     }
 
-    public void clear() {
-        editor.clear();
-        editor.commit();
-    }
-
-    public void removeValue(String key) {
-        editor.remove(key);
-        editor.commit();
-    }
-
     public void apply() {
         editor.apply();
     }
@@ -70,9 +60,6 @@ public class SharedPrefManager {
         writeString(FLIGHT_LIST_KEY, json);
     }
 
-    public void saveUserName(String userName) {
-        writeString(USER_NAME_KEY, userName);
-    }
 
     public String getUserName() {
         return sharedPreferences.getString(USER_NAME_KEY, "");

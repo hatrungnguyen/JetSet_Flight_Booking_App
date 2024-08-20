@@ -1,7 +1,5 @@
 package edu.birzeit.jetset.model;
 
-import java.util.Date;
-
 public class Flight {
     private int flightId;
     private String flightNumber;
@@ -20,11 +18,12 @@ public class Flight {
     private double priceExtraBaggage;
     private String isRecurrent; // e.g., "None", "Daily", "Weekly"
 
-    public Flight(){}
+    public Flight() {
+    }
 
     // Constructor
     public Flight(int flightId, String flightNumber, String departureCity, String destinationCity, String departureDateTime, String arrivalDateTime,
-                   String duration, String aircraftModel, int currentReservations, int maxSeats, int missedFlights,
+                  String duration, String aircraftModel, int currentReservations, int maxSeats, int missedFlights,
                   String bookingOpenDate, double priceEconomy, double priceBusiness, double priceExtraBaggage, String isRecurrent) {
 
         this.flightId = flightId;

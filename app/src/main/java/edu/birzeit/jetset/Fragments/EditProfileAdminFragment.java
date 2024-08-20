@@ -32,12 +32,12 @@ public class EditProfileAdminFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    TextInputEditText editFirstName, editLastName, editEmail, editPhoneNumber, editPassword, editConfirmPassword;
-    Button buttonSave;
-    DataBaseHelper dataBaseHelper;
-    SharedPrefManager sharedPrefManager;
-    Admin admin;
-    String oldEmail;
+    private TextInputEditText editFirstName, editLastName, editEmail, editPhone, editPassword, editConfirmPassword;
+    private Button buttonSave;
+    private DataBaseHelper dataBaseHelper;
+    private SharedPrefManager sharedPrefManager;
+    private Admin admin;
+    private String oldEmail;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -99,12 +99,14 @@ public class EditProfileAdminFragment extends Fragment {
             if (dataInvalid()) return;
             String hashedPassword = Hash.hashPassword(editPassword.getText().toString());
 
-            createAdmin(admin, editEmail.getText().toString(), editPhoneNumber.getText().toString(), editFirstName.getText().toString(),
+            createAdmin(admin, editEmail.getText().toString(), editPhone.getText().toString(), editFirstName.getText().toString(),
                         editLastName.getText().toString(), hashedPassword);
 
-            dataBaseHelper.updateAdmin(admin, oldEmail);
-            Toast.makeText(getContext(), "Admin Updated Successfully", Toast.LENGTH_SHORT).show();
-            sharedPrefManager.writeString(SAVED_EMAIL, editEmail.getText().toString());
+            if (dataBaseHelper.updateAdmin(admin, oldEmail) == 1) {
+                Toast.makeText(getContext(), "Admin Updated Successfully", Toast.LENGTH_SHORT).show();
+                sharedPrefManager.writeString(SAVED_EMAIL, editEmail.getText().toString());
+            } else
+                Toast.makeText(getContext(), "Error Updating Admin", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -115,17 +117,16 @@ public class EditProfileAdminFragment extends Fragment {
                 editFirstName.setText(cursor.getString(cursor.getColumnIndexOrThrow("FIRST_NAME")));
                 editLastName.setText(cursor.getString(cursor.getColumnIndexOrThrow("LAST_NAME")));
                 editEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow("EMAIL")));
-                editPhoneNumber.setText(cursor.getString(cursor.getColumnIndexOrThrow("PHONE")));
+                editPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow("PHONE")));
             } while (cursor.moveToNext());
         }
-
     }
 
     private void findViews() {
         editFirstName = getView().findViewById(R.id.editFirstName);
         editLastName = getView().findViewById(R.id.editLastName);
         editEmail = getView().findViewById(R.id.editEmail);
-        editPhoneNumber = getView().findViewById(R.id.editPhone);
+        editPhone = getView().findViewById(R.id.editPhone);
         editPassword = getView().findViewById(R.id.editPassword);
         editConfirmPassword = getView().findViewById(R.id.editConfirmPassword);
         buttonSave = getView().findViewById(R.id.buttonSave);
@@ -136,7 +137,7 @@ public class EditProfileAdminFragment extends Fragment {
         boolean validLastName = validateLastName(editLastName.getText().toString());
         boolean validPassword = validatePassword(editPassword.getText().toString(), editConfirmPassword.getText().toString());
         boolean validEmail = validateEmail(editEmail.getText().toString());
-        boolean validPhoneNumber = validatePhoneNumber(editPhoneNumber.getText().toString());
+        boolean validPhoneNumber = validatePhoneNumber(editPhone.getText().toString());
 
         if (!validName) {
             Toast.makeText(getContext(), "Please enter a valid first name", Toast.LENGTH_SHORT).show();
@@ -224,10 +225,10 @@ public class EditProfileAdminFragment extends Fragment {
 
     private boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.isEmpty()) {
-            editPhoneNumber.setError("Phone number is required");
+            editPhone.setError("Phone number is required");
             return false;
         } else if (!android.util.Patterns.PHONE.matcher(phoneNumber).matches()) {
-            editPhoneNumber.setError("Invalid phone number");
+            editPhone.setError("Invalid phone number");
             return false;
         } else {
             return true;

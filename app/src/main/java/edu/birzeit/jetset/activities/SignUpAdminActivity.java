@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -82,7 +81,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
     private boolean dataInvalid() {
         boolean validName = validateFirstName(editFirstName.getText().toString());
         boolean validLastName = validateLastName(editLastName.getText().toString());
-        boolean validPassword = validatePassword(editPassword.getText().toString());
+        boolean validPassword = validatePassword(editPassword.getText().toString(), editConfirmPassword.getText().toString());
         boolean validEmail = validateEmail(editEmail.getText().toString());
         boolean validPhoneNumber = validatePhoneNumber(editPhoneNumber.getText().toString());
 
@@ -131,21 +130,30 @@ public class SignUpAdminActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validatePassword(String password) {
-        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,15}$";
+    private boolean validatePassword(String password, String confirmPassword) {
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{8,15}$";
 
+//        if (!password.matches(passwordPattern)) {
+//            if (password.length() < 8 || password.length() > 15) {
+//                editPassword.setError("Password must be at least 8 characters and less than 15 characters");
+//            } else if (!password.matches(".*[a-z].*")) {
+//                editPassword.setError("Password must contain at least one lowercase letter");
+//            } else if (!password.matches(".*[A-Z].*")) {
+//                editPassword.setError("Password must contain at least one uppercase letter");
+//            } else if (!password.matches(".*[0-9].*")) {
+//                editPassword.setError("Password must contain at least one number");
+//            } else if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
+//                editPassword.setError("Password must contain at least one special character");
+//            }
+//            Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
+//            return false;
         if (!password.matches(passwordPattern)) {
-            if (password.length() < 8 || password.length() > 15) {
-                editPassword.setError("Password must be at least 8 characters and less than 15 characters");
-            } else if (!password.matches(".*[a-z].*")) {
-                editPassword.setError("Password must contain at least one lowercase letter");
-            } else if (!password.matches(".*[A-Z].*")) {
-                editPassword.setError("Password must contain at least one uppercase letter");
-            } else if (!password.matches(".*[0-9].*")) {
-                editPassword.setError("Password must contain at least one number");
-            } else if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
-                editPassword.setError("Password must contain at least one special character");
-            }
+            editPassword.setError("Password must be 8-15 characters with upper, lower, number, and special character.");
+            Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            editConfirmPassword.setError("Does not match password");
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

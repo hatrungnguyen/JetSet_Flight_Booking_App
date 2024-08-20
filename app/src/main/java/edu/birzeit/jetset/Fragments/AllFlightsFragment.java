@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,14 +43,18 @@ public class AllFlightsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String USER_ROLE = "UserRole";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    SharedPrefManager sharedPrefManager;
     private DataBaseHelper dataBaseHelper;
     private LinearLayout cardContainer;
     private Button buttonFilter;
-    private TextInputEditText editDepartureCity, editArrivalCity, editDepartureDate, editArrivalDate;
+    private TextInputEditText editDepartureCity, editArrivalCity, editDepartureDate, editArrivalDate, editReturnDate;
     private String departureCity, arrivalCity;
-    private Calendar departureDate, arrivalDate;
-
+    private Calendar departureDate, arrivalDate, returnDate;
+    private RadioButton radioOneWay, radioRoundTrip;
+    private RadioGroup radioGroup;
+    private boolean isOneWay;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -96,13 +102,25 @@ public class AllFlightsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dataBaseHelper = new DataBaseHelper(getContext());
-        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getContext());
+
+        sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("All Flights");
         if (getActivity() instanceof AdminHomeActivity) {
             ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
         }
 
         findAndSetupViews();
+        radioOneWay.setOnClickListener(v -> {
+            radioRoundTrip.setChecked(false);
+            editReturnDate.setEnabled(false);
+            editReturnDate.setText("");
+            isOneWay = true;
+        });
+        radioRoundTrip.setOnClickListener(v -> {
+            radioOneWay.setChecked(false);
+            editReturnDate.setEnabled(true);
+            isOneWay = false;
+        });
         fillFlights();
 
         buttonFilter.setOnClickListener(v -> {
@@ -124,6 +142,7 @@ public class AllFlightsFragment extends Fragment {
         return departureCity.isEmpty() &&
                 arrivalCity.isEmpty() &&
                 editDepartureDate.getText().toString().isEmpty() &&
+                editReturnDate.getText().toString().isEmpty() &&
                 editArrivalDate.getText().toString().isEmpty();
     }
 
@@ -132,6 +151,7 @@ public class AllFlightsFragment extends Fragment {
             departureCity = "";
         else
             departureCity = editDepartureCity.getText().toString();
+
         if (editArrivalCity.getText().toString().isEmpty())
             arrivalCity = "";
         else
@@ -155,6 +175,15 @@ public class AllFlightsFragment extends Fragment {
             } else {
                 arrivalDate = null;
             }
+
+            if (!editReturnDate.getText().toString().isEmpty()) {
+                if (returnDate == null) {
+                    returnDate = Calendar.getInstance();
+                }
+                returnDate.setTime(dateFormat.parse(editReturnDate.getText().toString()));
+            } else {
+                returnDate = null;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
             Log.d("Flight", "getData: " + e.getMessage());
@@ -168,16 +197,34 @@ public class AllFlightsFragment extends Fragment {
         editArrivalCity = getView().findViewById(R.id.editArrivalCity);
         editDepartureDate = getView().findViewById(R.id.editDepartureDate);
         editArrivalDate = getView().findViewById(R.id.editArrivalDate);
+        editReturnDate = getView().findViewById(R.id.editReturnDate);
         cardContainer = getView().findViewById(R.id.cardContainer);
         buttonFilter = getView().findViewById(R.id.buttonFilter);
+        radioOneWay = getView().findViewById(R.id.radio_oneWay);
+        radioGroup = getView().findViewById(R.id.radioGroup);
+        radioRoundTrip = getView().findViewById(R.id.radio_round);
+
+        if (sharedPrefManager.readString(USER_ROLE, "").equals("Admin")) {
+            editArrivalDate.setVisibility(View.VISIBLE);
+            editReturnDate.setVisibility(View.GONE);
+            radioGroup.setVisibility(View.GONE);
+        } else {
+            editArrivalDate.setVisibility(View.GONE);
+            editReturnDate.setVisibility(View.VISIBLE);
+            radioGroup.setVisibility(View.VISIBLE);
+            radioOneWay.setChecked(true);
+            editReturnDate.setEnabled(false);
+        }
 
         departureCity = "";
         arrivalCity = "";
         departureDate = Calendar.getInstance();
         arrivalDate = Calendar.getInstance();
+        returnDate = Calendar.getInstance();
 
         setupDatePickers(editDepartureDate);
         setupDatePickers(editArrivalDate);
+        setupDatePickers(editReturnDate);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -201,14 +248,22 @@ public class AllFlightsFragment extends Fragment {
         cardContainer.removeAllViews();
         Cursor cursor;
 
-        if (!isAllDataEmpty()) {
-            String departureDateString = (departureDate != null) ? dateFormat.format(departureDate.getTime()): "";
-            String arrivalDateString = (arrivalDate != null) ? dateFormat.format(arrivalDate.getTime()) : "";
+        String userRole = sharedPrefManager.readString(USER_ROLE, "");
+        boolean isAdmin = userRole.equals("Admin");
+        String departureDateString = (departureDate != null) ? dateFormat.format(departureDate.getTime()) : "";
+        String arrivalDateString = (arrivalDate != null) ? dateFormat.format(arrivalDate.getTime()) : "";
+        String returnDateString = (returnDate != null) ? dateFormat.format(returnDate.getTime()) : "";
+        isOneWay = radioOneWay.isChecked();
 
-            cursor = dataBaseHelper.getFlightsByCityAndDate(departureCity, arrivalCity, departureDateString, arrivalDateString);
-        } else {
+
+        if (isAllDataEmpty())
             cursor = dataBaseHelper.getAllFlights();
-        }
+        else if (isAdmin)
+            cursor = dataBaseHelper.getFlightsByCityAndDate(departureCity, arrivalCity, departureDateString, arrivalDateString);
+        else if (isOneWay)
+            cursor = dataBaseHelper.getFlightsByCityAndDepartureDate(departureCity, arrivalCity, departureDateString);
+        else
+            cursor = dataBaseHelper.getRoundTripFlights(departureCity, arrivalCity, departureDateString, returnDateString);
 
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -238,12 +293,14 @@ public class AllFlightsFragment extends Fragment {
 
                 cardView.setTag(flightId);
 
-                cardView.setOnClickListener(v -> openFlightDetailsFragment((String) v.getTag()));
-
+                cardView.setOnClickListener(v -> {
+                    if (sharedPrefManager.readString(USER_ROLE, "").equals("Admin"))
+                        openFlightDetailsAdminFragment((String) v.getTag());
+                    else
+                        openFlightDetailsPassengerFragment((String) v.getTag());
+                });
                 cardContainer.addView(cardView);
-
             } while (cursor.moveToNext());
-
             cursor.close();
         }
         dataBaseHelper.close();
@@ -254,11 +311,25 @@ public class AllFlightsFragment extends Fragment {
 //        }
     }
 
-    private void openFlightDetailsFragment(String flightId) {
+    private void openFlightDetailsAdminFragment(String flightId) {
         Bundle bundle = new Bundle();
         bundle.putString("FLIGHT_ID", flightId);
 
-        FlightDetailsFragment detailsFragment = new FlightDetailsFragment();
+        FlightDetailsAdminFragment detailsFragment = new FlightDetailsAdminFragment();
+        detailsFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, detailsFragment); // Make sure to use the correct container ID
+        fragmentTransaction.addToBackStack(null); // Optional, if you want to be able to go back
+        fragmentTransaction.commit();
+    }
+
+    private void openFlightDetailsPassengerFragment(String flightId) {
+        Bundle bundle = new Bundle();
+        bundle.putString("FLIGHT_ID", flightId);
+
+        FlightDetailsPassengerFragment detailsFragment = new FlightDetailsPassengerFragment();
         detailsFragment.setArguments(bundle);
 
         FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()

@@ -23,9 +23,9 @@
             android:title="Create Flight" />
 
         <item
-            android:id="@+id/nav_edit_flights"
-            android:icon="@drawable/edit"
-            android:title="Edit Flights" />
+            android:id="@+id/nav_view_all_flights"
+            android:icon="@drawable/view_list"
+            android:title="All Flights" />
 
     </group>
     <group
@@ -36,10 +36,6 @@
             android:icon="@drawable/reserve_horizontal"
             android:title="Reservations on Flights" />
 
-        <item
-            android:id="@+id/nav_view_all_flights"
-            android:icon="@drawable/view_list"
-            android:title="All Flights" />
 
         <item
             android:id="@+id/nav_view_open"

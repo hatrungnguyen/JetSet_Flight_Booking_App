@@ -56,7 +56,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private VerticalPagerAdapter pagerAdapter;
     private Passenger passenger;
-
+    private DotsIndicator dotsIndicator;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -72,7 +72,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(SignUpPassengerActivity.this);
 
         viewPager2 = findViewById(R.id.viewPager);
-        DotsIndicator dotsIndicator = findViewById(R.id.worm_dots_indicator);
+        dotsIndicator = findViewById(R.id.worm_dots_indicator);
         pagerAdapter = new VerticalPagerAdapter(LAYOUTS);
         viewPager2.setAdapter(pagerAdapter);
         viewPager2.setPageTransformer(new ZoomOutPageTransformer());
@@ -156,6 +156,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
         CustomArrayAdapter adapterCountries = new CustomArrayAdapter(this, R.layout.spinner_item, countriesList, 14);
         spinnerCountry.setAdapter(adapterCountries);
         spinnerNationality.setAdapter(adapterCountries);
+
 
         if (!TextUtils.isEmpty(defaultCountry)) {
             int position = adapterCountries.getPosition(defaultCountry);
@@ -277,7 +278,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean isDataEmpty(){
+    private boolean isDataEmpty() {
         return firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password.isEmpty() ||
                 confirmPassword.isEmpty() || passportNumber.isEmpty() || issuePlace.isEmpty() || foodPreference.isEmpty() ||
                 nationality.isEmpty() || dateOfBirth == null || issueDate == null || expiryDate == null;
@@ -430,6 +431,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean isDateAfter(Date startDate, Date endDate) {
         return endDate != null && startDate != null && endDate.after(startDate);
     }
+
     private boolean validateNationality() {
         if (TextUtils.isEmpty(nationality)) {
             editDateOfBirth.setError("Nationality cannot be empty.");
@@ -456,7 +458,6 @@ public class SignUpPassengerActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
 
     private void showDatePickerDialog(final EditText editText) {

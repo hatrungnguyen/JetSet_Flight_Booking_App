@@ -29,7 +29,7 @@ import edu.birzeit.jetset.tasks.Hash;
 public class MainActivity extends AppCompatActivity implements ConnectionAsyncTask.TaskCallback {
 
     private static final String IS_LOGGED_IN = "IsLoggedIn";
-    private static final String IS_FORCE_CLOSED = "IsForceClosed";
+    private static final String USER_ROLE = "UserRole";
     private static final String SAVED_EMAIL = "SavedEmail";
     private static final String USER_NAME_KEY = "UserName";
     private static final String REMEMBER_ME = "RememberMe";
@@ -66,32 +66,30 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
 
 
         boolean isLoggedIn = sharedPrefManager.readBoolean(IS_LOGGED_IN, false);
-        boolean isForceClosed = sharedPrefManager.readBoolean(IS_FORCE_CLOSED, false);
         String savedEmail = sharedPrefManager.readString(SAVED_EMAIL, "");
 
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
-        connectionAsyncTask.execute("https://api.mocki.io/v2/pk3l0h7g");
+        connectionAsyncTask.execute("https://api.mocki.io/v2/3qtqea85");
 
-        if (sharedPrefManager.readBoolean(REMEMBER_ME, false) && !savedEmail.isEmpty()) {
+        if (sharedPrefManager.readBoolean(REMEMBER_ME, false) && !savedEmail.isEmpty())
             email.setText(savedEmail);
-        }
 
-        if (isLoggedIn && !isForceClosed) {
-            navigateToHome();
-        }
+        if (isLoggedIn)
+            if (sharedPrefManager.readString(USER_ROLE, "").equals("Passenger"))
+                navigateToPassengerHome();
+            else if (sharedPrefManager.readString(USER_ROLE, "").equals("Admin"))
+                navigateToAdminHome();
 
-//        navigateToHome();
+
         login.setOnClickListener(v -> {
             String emailText = email.getText().toString();
             String passwordText = Hash.hashPassword(password.getText().toString());
-
             if (emailText.isEmpty() || passwordText.isEmpty()) {
                 displayToast("Please enter both email and password");
                 return;
             }
 
             boolean isValidLogin = dataBaseHelper.checkUserCredentials(emailText, passwordText);
-
             if (isValidLogin) {
                 sharedPrefManager.writeBoolean(REMEMBER_ME, rememberMe.isChecked());
 
@@ -100,13 +98,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
 
                 sharedPrefManager.writeString(USER_NAME_KEY, userName);
                 sharedPrefManager.writeBoolean(IS_LOGGED_IN, true);
-                sharedPrefManager.writeBoolean(IS_FORCE_CLOSED, true);
+                String userRole = getUserRoleFromDatabase(emailText);
+                sharedPrefManager.writeString(USER_ROLE, userRole);
                 sharedPrefManager.apply();
 
-                navigateToHome();
-            } else {
-                displayToast("Invalid email or password");
-            }
+                if (userRole.equals("Passenger")) navigateToPassengerHome();
+                else if (userRole.equals("Admin")) navigateToAdminHome();
+            } else displayToast("Invalid email or password");
         });
 
         signUp.setOnClickListener(v -> {
@@ -122,18 +120,29 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         }
     }
 
-    private void navigateToHome() {
+    private String getUserRoleFromDatabase(String email) {
+        try (DataBaseHelper dataBaseHelper = new DataBaseHelper(this)) {
+            return dataBaseHelper.getUserRole(email);
+        }
+    }
+
+    private void navigateToAdminHome() {
+        dataBaseHelper.close();
         Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
         startActivity(intent);
-        finish();  // Optionally finish the login activity so the user can't go back
+        finish();
+    }
+
+    private void navigateToPassengerHome() {
+        dataBaseHelper.close();
+        Intent intent = new Intent(MainActivity.this, PassengerHomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        sharedPrefManager.writeBoolean(IS_FORCE_CLOSED, true);
-        sharedPrefManager.apply();
     }
 
 

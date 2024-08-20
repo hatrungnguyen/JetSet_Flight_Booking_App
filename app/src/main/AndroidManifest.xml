@@ -34,6 +34,7 @@
         <activity android:name=".activities.SignUpAdminActivity" />
         <activity android:name=".activities.SignUpPassengerActivity" />
         <activity android:name=".activities.RetrievalFailedActivity" />
+        <activity android:name=".activities.PassengerHomeActivity" />
     </application>
 
 </manifest>
