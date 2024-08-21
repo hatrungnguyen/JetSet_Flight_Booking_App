@@ -71,6 +71,6 @@ public class SharedPrefManager {
     }
 
     public String readToolbarTitle() {
-        return sharedPreferences.getString(TOOLBAR_TITLE_KEY, "Home"); // Default title is "Home"
+        return sharedPreferences.getString(TOOLBAR_TITLE_KEY, "Home");
     }
 }

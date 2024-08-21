@@ -37,14 +37,7 @@ import edu.birzeit.jetset.database.SharedPrefManager;
 import edu.birzeit.jetset.model.Flight;
 import edu.birzeit.jetset.utils.CustomArrayAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FlightDetailsAdminFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FlightDetailsAdminFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
@@ -64,23 +57,12 @@ public class FlightDetailsAdminFragment extends Fragment {
     private Button saveButton, deleteButton;
     private DataBaseHelper dataBaseHelper;
     private Flight flight;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public FlightDetailsAdminFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FlightDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FlightDetailsAdminFragment newInstance(String param1, String param2) {
         FlightDetailsAdminFragment fragment = new FlightDetailsAdminFragment();
         Bundle args = new Bundle();
@@ -102,7 +84,6 @@ public class FlightDetailsAdminFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_flight_details_admin, container, false);
     }
 
@@ -330,15 +311,15 @@ public class FlightDetailsAdminFragment extends Fragment {
                 String departureDateTime = cursor.getString(cursor.getColumnIndex("DEPARTURE_DATETIME"));
                 String[] departureParts = departureDateTime.split(" ");
                 if (departureParts.length == 2) {
-                    editDepartureDate.setText(departureParts[0]); // Date part
-                    editDepartureTime.setText(departureParts[1]); // Time part
+                    editDepartureDate.setText(departureParts[0]);
+                    editDepartureTime.setText(departureParts[1]);
                 }
 
                 String arrivalDateTime = cursor.getString(cursor.getColumnIndex("ARRIVAL_DATETIME"));
                 String[] arrivalParts = arrivalDateTime.split(" ");
                 if (arrivalParts.length == 2) {
-                    editArrivalDate.setText(arrivalParts[0]); // Date part
-                    editArrivalTime.setText(arrivalParts[1]); // Time part
+                    editArrivalDate.setText(arrivalParts[0]);
+                    editArrivalTime.setText(arrivalParts[1]);
                 }
 
                 editBookingOpenDate.setText(cursor.getString(cursor.getColumnIndex("BOOKING_OPEN_DATE")));

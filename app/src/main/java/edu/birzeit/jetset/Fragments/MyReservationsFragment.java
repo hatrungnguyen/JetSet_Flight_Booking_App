@@ -24,11 +24,7 @@ import edu.birzeit.jetset.activities.PassengerHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyReservationsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MyReservationsFragment extends Fragment {
     private static final String SAVED_EMAIL = "SavedEmail";
     private static final String ARG_PARAM1 = "param1";
@@ -87,7 +83,6 @@ public class MyReservationsFragment extends Fragment {
         summaryContainer = view.findViewById(R.id.summaryContainer);
         buttonCurrent = view.findViewById(R.id.buttonCurrent);
         buttonPast = view.findViewById(R.id.buttonPast);
-
 
 
         buttonCurrent.setOnClickListener(v -> {

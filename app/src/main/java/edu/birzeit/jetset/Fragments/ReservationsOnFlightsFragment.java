@@ -4,13 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,13 +31,10 @@ import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReservationsOnFlightsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReservationsOnFlightsFragment extends Fragment {
     private static final String USER_ROLE = "UserRole";
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     SharedPrefManager sharedPrefManager;
     private DataBaseHelper dataBaseHelper;
@@ -47,28 +43,12 @@ public class ReservationsOnFlightsFragment extends Fragment {
     private TextInputEditText editDepartureCity, editArrivalCity, editDepartureDate, editArrivalDate;
     private String departureCity, arrivalCity;
     private Calendar departureDate, arrivalDate;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public ReservationsOnFlightsFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReservationsOnFlightsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReservationsOnFlightsFragment newInstance(String param1, String param2) {
         ReservationsOnFlightsFragment fragment = new ReservationsOnFlightsFragment();
         Bundle args = new Bundle();
@@ -90,7 +70,6 @@ public class ReservationsOnFlightsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_reservations_on_flights, container, false);
     }
 
@@ -208,11 +187,6 @@ public class ReservationsOnFlightsFragment extends Fragment {
             cursor.close();
         }
         dataBaseHelper.close();
-//        else {
-//            TextView textView = new TextView(this);
-//            textView.setText("No upcoming flights found.");
-//            linearLayout.addView(textView);
-//        }
     }
 
     private boolean isAllDataEmpty() {
@@ -261,10 +235,10 @@ public class ReservationsOnFlightsFragment extends Fragment {
         FlightReservationsFragment flightReservationsFragment = new FlightReservationsFragment();
         flightReservationsFragment.setArguments(bundle);
 
-        FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()
+        FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, flightReservationsFragment); // Make sure to use the correct container ID
-        fragmentTransaction.addToBackStack(null); // Optional, if you want to be able to go back
+        fragmentTransaction.replace(R.id.frame_layout, flightReservationsFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

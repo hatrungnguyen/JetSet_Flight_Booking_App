@@ -113,7 +113,6 @@ public class SignUpAdminActivity extends AppCompatActivity {
     }
 
     private boolean validateFirstName(String name) {
-        //if name is less than 3 characters, return false
         if (name.length() < 3 || name.length() > 20) {
             editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
             return false;
@@ -122,7 +121,6 @@ public class SignUpAdminActivity extends AppCompatActivity {
     }
 
     private boolean validateLastName(String name) {
-        //if name is less than 3 characters, return false
         if (name.length() < 3 || name.length() > 20) {
             editLastName.setError("Name must be at least 3 characters and less than 20 characters");
             return false;

@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
 
 
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
-//        dataBaseHelper.clearFlightTable();
         sharedPrefManager = SharedPrefManager.getInstance(MainActivity.this);
 
         signUp = findViewById(R.id.buttonSignUp);
@@ -158,16 +157,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         if (flights != null) {
             for (Flight flight : flights) {
                 if (dataBaseHelper.doesFlightExist(flight.getFlightNumber())) {
-                    // Flight exists, update it
                     dataBaseHelper.updateFlight(flight);
                 } else {
-                    // Flight does not exist, insert it
                     flight.setFlightId(dataBaseHelper.insertFlight(flight));
                 }
                 flightsAdded.add(flight);
             }
             sharedPrefManager.saveFlightList(flightsAdded);
-//        navigateToHome();
         }
     }
 

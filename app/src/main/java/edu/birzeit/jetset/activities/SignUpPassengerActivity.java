@@ -43,7 +43,6 @@ import edu.birzeit.jetset.utils.CustomArrayAdapter;
 import edu.birzeit.jetset.utils.VerticalPagerAdapter;
 
 public class SignUpPassengerActivity extends AppCompatActivity {
-    //    private static final int NUM_PAGES = 2;
     private static final int[] LAYOUTS = {R.layout.layout_passenger_first, R.layout.layout_passenger_second};
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
@@ -290,20 +289,7 @@ public class SignUpPassengerActivity extends AppCompatActivity {
                 || !validateNationality() || !validateFoodPreference() || !validateIssuePlace();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (viewPager2.getCurrentItem() == 0) {
-//            // If the user is currently looking at the first step, allow the system to handle the
-//            // Back button. This calls finish() on this activity and pops the back stack.
-//            super.onBackPressed();
-//        } else {
-//            // Otherwise, select the previous step.
-//            viewPager2.setCurrentItem(viewPager2.getCurrentItem() - 1);
-//        }
-//    }
-
     private boolean validateFirstName() {
-        //if name is less than 3 characters, return false
         if (firstName.length() < 3 || firstName.length() > 20) {
             editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
             Toast.makeText(this, "Please enter a valid first name", Toast.LENGTH_SHORT).show();
@@ -313,7 +299,6 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     }
 
     private boolean validateLastName() {
-        //if name is less than 3 characters, return false
         if (lastName.length() < 3 || lastName.length() > 20) {
             editLastName.setError("Name must be at least 3 characters and less than 20 characters");
             Toast.makeText(this, "Please enter a valid last name", Toast.LENGTH_SHORT).show();
