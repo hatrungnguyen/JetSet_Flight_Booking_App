@@ -113,4 +113,4 @@ The app uses SQLite for local data storage with the following structure:
 
 ## Demo
 
-[Watch the demo!</br> ![Watch the demo](./splashScreenSmall.gif)]([https://drive.google.com/your-demo-link](https://drive.google.com/file/d/1J_nPFffenT2eG4XRJb5ffIv4wqeUbrJC/view?usp=sharing))
+[Watch the demo!</br> ![Watch the demo](./splashScreenSmall.gif)](https://drive.google.com/file/d/1J_nPFffenT2eG4XRJb5ffIv4wqeUbrJC/view?usp=sharing)
