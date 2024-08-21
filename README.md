@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [<img src="/jetset_round.webp" alt="Jet Set" width="20"/> Jet Set Flight Reservation App](#-jet-set-flight-reservation-app)
+- [ Jet Set Flight Reservation App](#-jet-set-flight-reservation-app)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Getting Started](#getting-started)
@@ -112,3 +112,8 @@ The app uses SQLite for local data storage with the following structure:
 ## Screenshots
 
 ## Demo
+
+<a href="https://drive.google.com/file/d/1J_nPFffenT2eG4XRJb5ffIv4wqeUbrJC/view?usp=sharing">
+    Watch the demo! </br>
+    <img src="splashScreen.gif" alt="Watch the demo" width="180" />
+</a>
