@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         String savedEmail = sharedPrefManager.readString(SAVED_EMAIL, "");
 
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
-        connectionAsyncTask.execute("https://api.mocki.io/v2/3qtqea85");
+        connectionAsyncTask.execute("https://mocki.io/v1/9261f6be-a97a-4ddb-8e7a-14dbdc7d8acc");
 
         if (sharedPrefManager.readBoolean(REMEMBER_ME, false) && !savedEmail.isEmpty())
             email.setText(savedEmail);

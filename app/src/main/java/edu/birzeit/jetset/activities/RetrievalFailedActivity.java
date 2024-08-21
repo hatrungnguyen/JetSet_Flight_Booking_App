@@ -31,7 +31,7 @@ public class RetrievalFailedActivity extends AppCompatActivity implements Connec
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(v -> {
             ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(RetrievalFailedActivity.this);
-            connectionAsyncTask.execute("https://api.mocki.io/v2/3qtqea85");
+            connectionAsyncTask.execute("https://mocki.io/v1/9261f6be-a97a-4ddb-8e7a-14dbdc7d8acc");
         });
     }
 
