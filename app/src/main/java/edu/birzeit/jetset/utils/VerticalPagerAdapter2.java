@@ -18,13 +18,13 @@ public class VerticalPagerAdapter2 extends RecyclerView.Adapter<VerticalPagerAda
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Here, we just use the provided View instead of inflating a new one
+
         return new ViewHolder(pageViews.get(viewType));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Nothing specific to bind, just return the view
+
     }
 
     @Override

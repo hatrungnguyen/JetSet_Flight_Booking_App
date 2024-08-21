@@ -44,7 +44,6 @@ public class ChooseRoleActivity extends AppCompatActivity {
                 intent = new Intent(ChooseRoleActivity.this, SignUpPassengerActivity.class);
                 startActivity(intent);
             } else {
-                // display toast message saying please choose one
                 Toast.makeText(ChooseRoleActivity.this, "Please choose a role to proceed.", Toast.LENGTH_SHORT).show();
             }
 

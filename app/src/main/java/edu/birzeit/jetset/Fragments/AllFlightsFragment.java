@@ -39,8 +39,6 @@ import edu.birzeit.jetset.database.SharedPrefManager;
  * create an instance of this fragment.
  */
 public class AllFlightsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String USER_ROLE = "UserRole";
@@ -55,23 +53,12 @@ public class AllFlightsFragment extends Fragment {
     private RadioButton radioOneWay, radioRoundTrip;
     private RadioGroup radioGroup;
     private boolean isOneWay;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public AllFlightsFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllFlightsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AllFlightsFragment newInstance(String param1, String param2) {
         AllFlightsFragment fragment = new AllFlightsFragment();
         Bundle args = new Bundle();
@@ -93,7 +80,6 @@ public class AllFlightsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_flights, container, false);
     }
 
@@ -304,11 +290,6 @@ public class AllFlightsFragment extends Fragment {
             cursor.close();
         }
         dataBaseHelper.close();
-//        else {
-//            TextView textView = new TextView(this);
-//            textView.setText("No upcoming flights found.");
-//            linearLayout.addView(textView);
-//        }
     }
 
     private void openFlightDetailsAdminFragment(String flightId) {
@@ -318,10 +299,10 @@ public class AllFlightsFragment extends Fragment {
         FlightDetailsAdminFragment detailsFragment = new FlightDetailsAdminFragment();
         detailsFragment.setArguments(bundle);
 
-        FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()
+        FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, detailsFragment); // Make sure to use the correct container ID
-        fragmentTransaction.addToBackStack(null); // Optional, if you want to be able to go back
+        fragmentTransaction.replace(R.id.frame_layout, detailsFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -332,10 +313,10 @@ public class AllFlightsFragment extends Fragment {
         FlightDetailsPassengerFragment detailsFragment = new FlightDetailsPassengerFragment();
         detailsFragment.setArguments(bundle);
 
-        FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()
+        FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, detailsFragment); // Make sure to use the correct container ID
-        fragmentTransaction.addToBackStack(null); // Optional, if you want to be able to go back
+        fragmentTransaction.replace(R.id.frame_layout, detailsFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

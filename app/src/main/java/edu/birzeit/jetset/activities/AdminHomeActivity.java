@@ -88,7 +88,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
 
-        String title = "Home"; // Default title
+        String title = "Home";
         Fragment selectedFragment = null;
 
         if (itemId == R.id.nav_home) {

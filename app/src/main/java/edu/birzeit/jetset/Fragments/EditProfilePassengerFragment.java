@@ -44,11 +44,6 @@ import edu.birzeit.jetset.tasks.ZoomOutPageTransformer;
 import edu.birzeit.jetset.utils.CustomArrayAdapter;
 import edu.birzeit.jetset.utils.VerticalPagerAdapter2;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfilePassengerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EditProfilePassengerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -96,11 +91,8 @@ public class EditProfilePassengerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_profile_passenger, container, false);
 
-        // Inflate the individual pages
         firstPageView = inflater.inflate(R.layout.layout_passenger_edit_first, container, false);
         secondPageView = inflater.inflate(R.layout.layout_passenger_edit_second, container, false);
-
-        // Initialize the adapter (you may need to modify it to accept View references instead of layout IDs)
         pagerAdapter = new VerticalPagerAdapter2(Arrays.asList(firstPageView, secondPageView));
 
         return rootView;
@@ -161,12 +153,11 @@ public class EditProfilePassengerFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        // Register the OnBackPressedCallback with the fragment's activity
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (viewPager2.getCurrentItem() == 0) {
-                    requireActivity().finish(); // Correct way to finish the activity
+                    requireActivity().finish();
                 } else {
                     viewPager2.setCurrentItem(viewPager2.getCurrentItem() - 1);
                 }
@@ -339,7 +330,6 @@ public class EditProfilePassengerFragment extends Fragment {
     }
 
     private boolean validateFirstName() {
-        //if name is less than 3 characters, return false
         if (firstName.length() < 3 || firstName.length() > 20) {
             editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
             Toast.makeText(getContext(), "Please enter a valid first name", Toast.LENGTH_SHORT).show();
@@ -349,7 +339,6 @@ public class EditProfilePassengerFragment extends Fragment {
     }
 
     private boolean validateLastName() {
-        //if name is less than 3 characters, return false
         if (lastName.length() < 3 || lastName.length() > 20) {
             editLastName.setError("Name must be at least 3 characters and less than 20 characters");
             Toast.makeText(getContext(), "Please enter a valid last name", Toast.LENGTH_SHORT).show();

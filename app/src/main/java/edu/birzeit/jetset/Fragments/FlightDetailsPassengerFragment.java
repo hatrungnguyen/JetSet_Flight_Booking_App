@@ -45,7 +45,6 @@ public class FlightDetailsPassengerFragment extends Fragment {
     private String mParam2;
 
     public FlightDetailsPassengerFragment() {
-        // Required empty public constructor
     }
 
     public static FlightDetailsPassengerFragment newInstance(String param1, String param2) {
@@ -69,7 +68,6 @@ public class FlightDetailsPassengerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_flight_details_passenger, container, false);
     }
 
@@ -107,13 +105,6 @@ public class FlightDetailsPassengerFragment extends Fragment {
                     cancelButton.setVisibility(View.GONE);
                     summaryContainer.setVisibility(View.GONE);
                 }
-
-//                    new Handler().postDelayed(() -> {
-//                        Bundle result = new Bundle();
-//                        result.putBoolean("isUpdated", true);
-//                        getParentFragmentManager().setFragmentResult("reservationDataUpdated", result);
-//                        getActivity().onBackPressed();
-//                    }, 1500);
 
             });
 

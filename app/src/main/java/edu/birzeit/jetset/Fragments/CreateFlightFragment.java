@@ -44,8 +44,6 @@ import edu.birzeit.jetset.utils.CustomArrayAdapter;
  * create an instance of this fragment.
  */
 public class CreateFlightFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @SuppressLint("SimpleDateFormat")
@@ -64,23 +62,13 @@ public class CreateFlightFragment extends Fragment {
     private Flight flight;
     SharedPrefManager sharedPrefManager;
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
     public CreateFlightFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateFlightFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CreateFlightFragment newInstance(String param1, String param2) {
         CreateFlightFragment fragment = new CreateFlightFragment();
         Bundle args = new Bundle();
@@ -102,7 +90,6 @@ public class CreateFlightFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_flight, container, false);
     }
 
@@ -149,10 +136,10 @@ public class CreateFlightFragment extends Fragment {
             flight.setFlightId(insertResult);
             Toast.makeText(getContext(), "Flight Created Successfully", Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(() -> {
-                FragmentManager fragmentManager = getParentFragmentManager(); // or requireActivity().getSupportFragmentManager()
+                FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, new AllFlightsFragment()); // Make sure to use the correct container ID
-                fragmentTransaction.addToBackStack(null); // Optional, if you want to be able to go back
+                fragmentTransaction.replace(R.id.frame_layout, new AllFlightsFragment());
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }, 1500);
         });

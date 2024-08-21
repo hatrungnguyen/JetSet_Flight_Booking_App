@@ -111,11 +111,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("HASHED_PASSWORD", passenger.getHashedPassword());
         contentValues.put("ROLE", "Passenger");
         contentValues.put("PASSPORT_NUMBER", passenger.getPassportNumber());
-        contentValues.put("PASSPORT_ISSUE_DATE", passenger.getPassportIssueDate()); // Convert to String or appropriate format
+        contentValues.put("PASSPORT_ISSUE_DATE", passenger.getPassportIssueDate());
         contentValues.put("PASSPORT_ISSUE_PLACE", passenger.getPassportIssuePlace());
-        contentValues.put("PASSPORT_EXPIRATION_DATE", passenger.getPassportExpiryDate()); // Convert to String or appropriate format
+        contentValues.put("PASSPORT_EXPIRATION_DATE", passenger.getPassportExpiryDate());
         contentValues.put("FOOD_PREFERENCE", passenger.getFoodPreference());
-        contentValues.put("DATE_OF_BIRTH", passenger.getDateOfBirth()); // Convert to String or appropriate format
+        contentValues.put("DATE_OF_BIRTH", passenger.getDateOfBirth());
         contentValues.put("NATIONALITY", passenger.getNationality());
 
         sqLiteDatabase.insert("USER", null, contentValues);
@@ -244,7 +244,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getFlightsByCityAndDate(String departureCity, String destinationCity, String departureDate, String arrivalDate) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM FLIGHT WHERE 1=1"); // 1=1 ensures we can append conditions with AND
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM FLIGHT WHERE 1=1");
         List<String> args = new ArrayList<>();
 
         if (departureCity != null && !departureCity.isEmpty()) {
@@ -302,12 +302,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         if (departureCity != null && !departureCity.isEmpty()) {
             queryBuilder.append(" AND DEPARTURE_CITY = ?");
-            args.add(destinationCity); // Inverted for round trip
+            args.add(destinationCity);
         }
 
         if (destinationCity != null && !destinationCity.isEmpty()) {
             queryBuilder.append(" AND DESTINATION_CITY = ?");
-            args.add(departureCity); // Inverted for round trip
+            args.add(departureCity);
         }
 
         if (returnDate != null && !returnDate.isEmpty()) {

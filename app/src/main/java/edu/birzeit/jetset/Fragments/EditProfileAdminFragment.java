@@ -21,15 +21,8 @@ import edu.birzeit.jetset.database.SharedPrefManager;
 import edu.birzeit.jetset.model.Admin;
 import edu.birzeit.jetset.tasks.Hash;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileAdminFragment#newInstance} factory method to
- * create an instance of getContext() fragment.
- */
 public class EditProfileAdminFragment extends Fragment {
     private static final String SAVED_EMAIL = "SavedEmail";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private TextInputEditText editFirstName, editLastName, editEmail, editPhone, editPassword, editConfirmPassword;
@@ -38,23 +31,12 @@ public class EditProfileAdminFragment extends Fragment {
     private SharedPrefManager sharedPrefManager;
     private Admin admin;
     private String oldEmail;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public EditProfileAdminFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use getContext() factory method to create a new instance of
-     * getContext() fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileAdminFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static EditProfileAdminFragment newInstance(String param1, String param2) {
         EditProfileAdminFragment fragment = new EditProfileAdminFragment();
         Bundle args = new Bundle();
@@ -76,7 +58,6 @@ public class EditProfileAdminFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for getContext() fragment
         return inflater.inflate(R.layout.fragment_edit_profile_admin, container, false);
     }
 

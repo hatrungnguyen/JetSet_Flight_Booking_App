@@ -16,12 +16,11 @@ public class Flight {
     private double priceEconomy;
     private double priceBusiness;
     private double priceExtraBaggage;
-    private String isRecurrent; // e.g., "None", "Daily", "Weekly"
+    private String isRecurrent;
 
     public Flight() {
     }
 
-    // Constructor
     public Flight(int flightId, String flightNumber, String departureCity, String destinationCity, String departureDateTime, String arrivalDateTime,
                   String duration, String aircraftModel, int currentReservations, int maxSeats, int missedFlights,
                   String bookingOpenDate, double priceEconomy, double priceBusiness, double priceExtraBaggage, String isRecurrent) {
