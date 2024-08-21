@@ -26,25 +26,7 @@ Jet Set is a flight reservation application developed in Java with XML for desig
 
 ## Getting Started
 
-To get started with Magnetic Cave Game, ensure you have Python and Pygame installed on your system. Follow the instructions below to run the game:
-
-1. **Clone the repository**:
-
-   ```sh
-   git clone https://github.com/samasthtc/ENCS3340-Magnetic-Cave-Game.git
-   cd ENCS3340-Magnetic-Cave-Game
-   ```
-
-2. **Install the required dependencies**:
-
-   ```sh
-   pip install pygame
-   ```
-
-3. **Run the game**:
-   ```sh
-   python MagneticCave.py
-   ```
+To get started with Jet Set, download the pre-release JetSet.apk file on an android device or emulator.
 
 ## Features
 
