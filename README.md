@@ -1,8 +1,8 @@
-# ✈️ Jet Set Flight Reservation App
+# <img src="/jetset_round.webp" alt="Jet Set" width="50"/> Jet Set Flight Reservation App
 
 ## Table of Contents
 
-- [✈️ Jet Set Flight Reservation App](#️-jet-set-flight-reservation-app)
+- [<img src="/jetset_round.webp" alt="Jet Set" width="20"/> Jet Set Flight Reservation App](#-jet-set-flight-reservation-app)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Getting Started](#getting-started)
@@ -26,7 +26,7 @@ Jet Set is a flight reservation application developed in Java with XML for desig
 
 ## Getting Started
 
-To get started with Jet Set, download the pre-release JetSet.apk file on an android device or emulator.
+To get started with Jet Set <img src="/jetset_round.webp" alt="Jet Set" width="20"/>, download the pre-release JetSet.apk file on an android device or emulator.
 
 ## Features
 
