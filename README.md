@@ -22,7 +22,7 @@
 
 ## Overview
 
-Jet Set is a flight reservation application developed in Java with XML for designing the user interface. The app uses SQLite for managing data related to flights, users, and reservations. Upon launch, flight data is fetched from an external API. Users can either be admins or passengers, each having distinct functionalities. The app offers a smooth user experience with custom animations and a responsive design.
+Jet Set is a flight reservation application developed in Java with XML for designing the user interface. The app uses SQLite for managing data related to flights, users, and reservations. Upon launch, mock flight data is fetched from an external API. Users can either be admins or passengers, each having distinct functionalities. The app offers a smooth user experience with custom animations and a responsive design.
 
 ## Getting Started
 
@@ -42,7 +42,7 @@ To get started with Jet Set <img src="/jetset_round.webp" alt="Jet Set" width="2
 #### Admin Role:
 
 - Perform CRUD operations on flights.
-- Filter and search flights by specifiying departure and arrival places and dates.
+- Filter and search flights by specifying departure and arrival places and dates.
 - View reservations made by passengers on flights.
 
 #### Passenger Role:
