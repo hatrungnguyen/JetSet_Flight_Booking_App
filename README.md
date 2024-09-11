@@ -95,7 +95,6 @@ The app uses SQLite for local data storage with the following structure:
 
 - **USER:**
   - Stores user information for both admins and passengers.
-  -
 
 ## Animations
 
