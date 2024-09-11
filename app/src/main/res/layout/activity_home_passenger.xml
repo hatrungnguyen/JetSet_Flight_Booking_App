@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -50,6 +51,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
+        android:layout_marginTop="32dp"
         app:itemIconPadding="16dp"
         app:itemIconTint="@color/lavender"
         app:itemTextColor="@color/lavender"
