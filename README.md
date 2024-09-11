@@ -108,8 +108,6 @@ The app uses SQLite for local data storage with the following structure:
 - Lottie Library for animations
 - Java and XML for development
 
-## Screenshots
-
 ## Demo
 
 [Watch the demo!](https://drive.google.com/file/d/1J_nPFffenT2eG4XRJb5ffIv4wqeUbrJC/view?usp=sharing) </br>
