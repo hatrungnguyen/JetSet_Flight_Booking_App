@@ -109,7 +109,6 @@ The app uses SQLite for local data storage with the following structure:
 - Java and XML for development
 
 ## Demo
-
 ![Watch the demo](./splashScreenSmall.gif) </br>
-Watch the demo! </br>
+
 https://github.com/user-attachments/assets/e0354316-f92b-474f-82e0-68e84728c891
