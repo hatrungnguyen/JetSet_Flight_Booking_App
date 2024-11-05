@@ -113,23 +113,23 @@ public class SignUpAdminActivity extends AppCompatActivity {
     }
 
     private boolean validateFirstName(String name) {
-        if (name.length() < 3 || name.length() > 20) {
-            editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
-            return false;
-        }
+//        if (name.length() < 3 || name.length() > 20) {
+//            editFirstName.setError("Name must be at least 3 characters and less than 20 characters");
+//            return false;
+//        }
         return true;
     }
 
     private boolean validateLastName(String name) {
-        if (name.length() < 3 || name.length() > 20) {
-            editLastName.setError("Name must be at least 3 characters and less than 20 characters");
-            return false;
-        }
+//        if (name.length() < 3 || name.length() > 20) {
+//            editLastName.setError("Name must be at least 3 characters and less than 20 characters");
+//            return false;
+//        }
         return true;
     }
 
     private boolean validatePassword(String password, String confirmPassword) {
-        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{8,15}$";
+        String passwordPattern = "";
 
 //        if (!password.matches(passwordPattern)) {
 //            if (password.length() < 8 || password.length() > 15) {

@@ -70,7 +70,7 @@ public class FlightsBasedOnBookingFragment extends Fragment {
         }
         cursor = dataBaseHelper.getFlightsOpenForBooking();
 
-        findViews();
+//        findViews();
         fillFlights();
 
         buttonOpen.setOnClickListener(v -> {
@@ -85,11 +85,11 @@ public class FlightsBasedOnBookingFragment extends Fragment {
 
     }
 
-    private void findViews() {
-        cardContainer = getView().findViewById(R.id.cardContainer);
-        buttonOpen = getView().findViewById(R.id.buttonOpen);
-        buttonClosed = getView().findViewById(R.id.buttonClosed);
-    }
+//    private void findViews() {
+//        cardContainer = getView().findViewById(R.id.cardContainer);
+//        buttonOpen = getView().findViewById(R.id.buttonOpen);
+//        buttonClosed = getView().findViewById(R.id.buttonClosed);
+//    }
 
     @SuppressLint("SetTextI18n")
     public void fillFlights() {

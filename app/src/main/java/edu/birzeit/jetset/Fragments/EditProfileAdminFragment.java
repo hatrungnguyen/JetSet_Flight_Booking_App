@@ -165,7 +165,7 @@ public class EditProfileAdminFragment extends Fragment {
     }
 
     private boolean validatePassword(String password, String confirmPassword) {
-        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{8,15}$";
+        String passwordPattern = "^.{8,15}$";
 
 //        if (!password.matches(passwordPattern)) {
 //            if (password.length() < 8 || password.length() > 15) {

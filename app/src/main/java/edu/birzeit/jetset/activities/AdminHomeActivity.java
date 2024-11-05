@@ -97,18 +97,18 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
         } else if (itemId == R.id.nav_create_flight) {
             selectedFragment = new CreateFlightFragment();
             title = "Create Flight";
-        } else if (itemId == R.id.nav_view_reservations) {
-            selectedFragment = new ReservationsOnFlightsFragment();
-            title = "Reservations";
+//        } else if (itemId == R.id.nav_view_reservations) {
+//            selectedFragment = new ReservationsOnFlightsFragment();
+//            title = "Reservations";
         } else if (itemId == R.id.nav_view_all_flights) {
             selectedFragment = new AllFlightsFragment();
             title = "All Flights";
-        } else if (itemId == R.id.nav_view_open) {
-            selectedFragment = new FlightsBasedOnBookingFragment();
-            title = "Flights by Booking";
-        } else if (itemId == R.id.nav_view_archive) {
-            selectedFragment = new FlightsArchiveFragment();
-            title = "Flights Archive";
+//        } else if (itemId == R.id.nav_view_open) {
+//            selectedFragment = new FlightsBasedOnBookingFragment();
+//            title = "Flights by Booking";
+//        } else if (itemId == R.id.nav_view_archive) {
+//            selectedFragment = new FlightsArchiveFragment();
+//            title = "Flights Archive";
         } else if (itemId == R.id.nav_edit_profile) {
             selectedFragment = new EditProfileAdminFragment();
             title = "Edit Profile";
