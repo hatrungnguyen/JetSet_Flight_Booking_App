@@ -73,6 +73,7 @@ public class EditProfileAdminFragment extends Fragment {
         oldEmail = sharedPrefManager.readString(SAVED_EMAIL, "");
 
         findViews();
+
         fillViews();
 
         buttonSave.setOnClickListener(v -> {
