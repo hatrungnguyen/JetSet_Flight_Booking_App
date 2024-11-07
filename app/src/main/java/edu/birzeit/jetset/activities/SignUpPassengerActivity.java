@@ -310,20 +310,6 @@ public class SignUpPassengerActivity extends AppCompatActivity {
     private boolean validatePassword() {
         String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{8,15}$";
 
-//        if (!password.matches(passwordPattern)) {
-//            if (password.length() < 8 || password.length() > 15) {
-//                editPassword.setError("Password must be at least 8 characters and less than 15 characters");
-//            } else if (!password.matches(".*[a-z].*")) {
-//                editPassword.setError("Password must contain at least one lowercase letter");
-//            } else if (!password.matches(".*[A-Z].*")) {
-//                editPassword.setError("Password must contain at least one uppercase letter");
-//            } else if (!password.matches(".*[0-9].*")) {
-//                editPassword.setError("Password must contain at least one number");
-//            } else if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
-//                editPassword.setError("Password must contain at least one special character");
-//            }
-//            Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
-//            return false;
         if (!password.matches(passwordPattern)) {
             editPassword.setError("Password must be 8-15 characters with upper, lower, number, and special character.");
             Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();

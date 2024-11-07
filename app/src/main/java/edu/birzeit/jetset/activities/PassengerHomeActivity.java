@@ -24,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 import edu.birzeit.jetset.Fragments.AllFlightsFragment;
 import edu.birzeit.jetset.Fragments.EditProfilePassengerFragment;
 import edu.birzeit.jetset.Fragments.HomeFragment;
-import edu.birzeit.jetset.Fragments.MyReservationsFragment;
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;

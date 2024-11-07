@@ -291,15 +291,6 @@ public class AllFlightsFragment extends Fragment {
     private void openFlightDetailsAdminFragment(String flightId) {
         Bundle bundle = new Bundle();
         bundle.putString("FLIGHT_ID", flightId);
-
-        FlightDetailsAdminFragment detailsFragment = new FlightDetailsAdminFragment();
-        detailsFragment.setArguments(bundle);
-
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, detailsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     private void openFlightDetailsPassengerFragment(String flightId) {

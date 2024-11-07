@@ -226,14 +226,6 @@ public class FlightDetailsPassengerFragment extends Fragment {
         bundle.putString("FLIGHT_ID", flightId);
         bundle.putString("PASSENGER_EMAIL", savedEmail);
 
-        ConfirmReservationFragment reservationFragment = new ConfirmReservationFragment();
-        reservationFragment.setArguments(bundle);
-
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, reservationFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     @SuppressLint("Range")
