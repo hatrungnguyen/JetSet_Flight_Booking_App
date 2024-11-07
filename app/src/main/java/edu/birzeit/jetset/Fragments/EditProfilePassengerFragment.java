@@ -243,9 +243,9 @@ public class EditProfilePassengerFragment extends Fragment {
             editIssueDate = secondPageView.findViewById(R.id.editTextDate);
             editExpiryDate = secondPageView.findViewById(R.id.editTextDate2);
             editDateOfBirth = secondPageView.findViewById(R.id.editTextDate3);
-            spinnerCountry = secondPageView.findViewById(R.id.spinnerCountry);
-            spinnerFoodPreference = secondPageView.findViewById(R.id.spinner);
-            spinnerNationality = secondPageView.findViewById(R.id.spinnerNationality);
+//            spinnerCountry = secondPageView.findViewById(R.id.spinnerCountry);
+//            spinnerFoodPreference = secondPageView.findViewById(R.id.spinner);
+//            spinnerNationality = secondPageView.findViewById(R.id.spinnerNationality);
 
             Locale defaultLocale = Locale.getDefault();
             String defaultCountry = defaultLocale.getDisplayCountry();
@@ -267,9 +267,9 @@ public class EditProfilePassengerFragment extends Fragment {
                 editIssueDate.setText(cursor.getString(cursor.getColumnIndexOrThrow("PASSPORT_ISSUE_DATE")));
                 editExpiryDate.setText(cursor.getString(cursor.getColumnIndexOrThrow("PASSPORT_EXPIRATION_DATE")));
                 editDateOfBirth.setText(cursor.getString(cursor.getColumnIndexOrThrow("DATE_OF_BIRTH")));
-                spinnerCountry.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("PASSPORT_ISSUE_PLACE")));
-                spinnerFoodPreference.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("FOOD_PREFERENCE")));
-                spinnerNationality.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("NATIONALITY")));
+//                spinnerCountry.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("PASSPORT_ISSUE_PLACE")));
+//                spinnerFoodPreference.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("FOOD_PREFERENCE")));
+//                spinnerNationality.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow("NATIONALITY")));
             } while (cursor.moveToNext());
         }
     }

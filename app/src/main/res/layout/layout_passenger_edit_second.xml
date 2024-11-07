@@ -78,13 +78,13 @@
                 android:textColor="@color/darkPurple"
                 android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/spinnerCountry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="190dp"
-                android:minHeight="56dp"
-                android:popupBackground="@drawable/rounded_popup" />
+<!--            <Spinner-->
+<!--                android:id="@+id/spinnerCountry"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:dropDownWidth="190dp"-->
+<!--                android:minHeight="56dp"-->
+<!--                android:popupBackground="@drawable/rounded_popup" />-->
         </LinearLayout>
 
     </LinearLayout>
@@ -134,13 +134,13 @@
                 android:textColor="@color/darkPurple"
                 android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="175dp"
-                android:minHeight="56dp"
-                android:popupBackground="@drawable/rounded_popup" />
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:dropDownWidth="175dp"-->
+<!--                android:minHeight="56dp"-->
+<!--                android:popupBackground="@drawable/rounded_popup" />-->
         </LinearLayout>
 
     </LinearLayout>
@@ -175,11 +175,11 @@
         android:textColor="@color/darkPurple"
         android:textSize="14sp" />
 
-    <Spinner
-        android:id="@+id/spinnerNationality"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:dropDownWidth="300dp"
-        android:minHeight="60dp"
-        android:popupBackground="@drawable/rounded_popup" />
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerNationality"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:dropDownWidth="300dp"-->
+<!--        android:minHeight="60dp"-->
+<!--        android:popupBackground="@drawable/rounded_popup" />-->
 </LinearLayout>

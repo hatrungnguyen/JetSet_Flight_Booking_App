@@ -251,45 +251,6 @@ public class FlightDetailsPassengerFragment extends Fragment {
                     String numOfExtraBags = cursor.getString(cursor.getColumnIndexOrThrow("NUM_EXTRA_BAGS"));
                     String totalPrice = cursor.getString(cursor.getColumnIndexOrThrow("PRICE"));
 
-                    View summaryView = getLayoutInflater().inflate(R.layout.summary_card, summaryContainer, false);
-
-                    TextView textViewFlightNumber = summaryView.findViewById(R.id.textViewFlightNumber);
-                    TextView textViewFrom = summaryView.findViewById(R.id.textViewFrom);
-                    TextView textViewTo = summaryView.findViewById(R.id.textViewTo);
-                    TextView textViewDepartureDate = summaryView.findViewById(R.id.textViewDepartureDate);
-                    TextView textViewArrivalDate = summaryView.findViewById(R.id.textViewArrivalDate);
-                    TextView textViewDepartureTime = summaryView.findViewById(R.id.textViewDepartureTime);
-                    TextView textViewArrivalTime = summaryView.findViewById(R.id.textViewArrivalTime);
-                    TextView textViewDuration = summaryView.findViewById(R.id.textViewDuration);
-                    TextView textViewClass = summaryView.findViewById(R.id.textViewClass);
-                    TextView textViewBags = summaryView.findViewById(R.id.textViewBags);
-                    TextView textViewFood = summaryView.findViewById(R.id.textViewFood);
-                    TextView textViewPrice = summaryView.findViewById(R.id.textViewPrice);
-                    TextView textViewFlightID = summaryView.findViewById(R.id.textViewFlightID);
-                    TextView textViewReservationID = summaryView.findViewById(R.id.textViewReservationID);
-
-                    textViewFlightNumber.setText(flightNumber);
-                    textViewFrom.setText(departureCity);
-                    textViewTo.setText(destinationCity);
-                    textViewDepartureDate.setText(departureDateTime.split(" ")[0]);
-                    textViewArrivalDate.setText(arrivalDateTime.split(" ")[0]);
-                    textViewDepartureTime.setText(departureDateTime.split(" ")[1]);
-                    textViewArrivalTime.setText(arrivalDateTime.split(" ")[1]);
-                    textViewDuration.setText(duration);
-                    textViewClass.setText(flightClass);
-                    textViewBags.setText(numOfExtraBags);
-                    textViewFood.setText(foodPreference);
-                    textViewPrice.setText("$" + totalPrice);
-                    textViewFlightID.setText(flightId);
-                    textViewReservationID.setText(reservationId);
-
-                    summaryView.setTag(flightId);
-
-                    ImageView planeImageView = summaryView.findViewById(R.id.plane);
-                    Animation planeAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.plane_animation);
-                    planeImageView.startAnimation(planeAnimation);
-
-                    summaryContainer.addView(summaryView);
                 }
                 flightCursor.close();
             } while (cursor.moveToNext());

@@ -16,10 +16,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import edu.birzeit.jetset.model.Admin;
+//import edu.birzeit.jetset.model.Admin;
 import edu.birzeit.jetset.model.Flight;
 import edu.birzeit.jetset.model.Passenger;
-import edu.birzeit.jetset.model.Reservation;
+//import edu.birzeit.jetset.model.Reservation;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -88,18 +88,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertAdmin(Admin admin) {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("EMAIL", admin.getEmail());
-        contentValues.put("PHONE", admin.getPhoneNumber());
-        contentValues.put("FIRST_NAME", admin.getFirstName());
-        contentValues.put("LAST_NAME", admin.getLastName());
-        contentValues.put("HASHED_PASSWORD", admin.getHashedPassword());
-        contentValues.put("ROLE", "Admin");
-
-        sqLiteDatabase.insert("USER", null, contentValues);
-    }
 
     public void insertPassenger(Passenger passenger) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -147,18 +135,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return (int) id;
     }
 
-    public int insertReservation(Reservation reservation) {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("FLIGHT_ID", reservation.getFlightId());
-        contentValues.put("PASSENGER_EMAIL", reservation.getPassengerEmail());
-        contentValues.put("FLIGHT_CLASS", reservation.getFlightClass());
-        contentValues.put("NUM_EXTRA_BAGS", reservation.getNumOfExtraBags());
-        contentValues.put("FOOD_PREFERENCE", reservation.getFoodPreference());
-        contentValues.put("PRICE", reservation.getTotalPrice());
-
-        return (int) sqLiteDatabase.insert("RESERVATION", null, contentValues);
-    }
 
     public double calculateTotalPrice(int flightId, String flightClass, int numOfExtraBags) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
@@ -197,19 +173,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String lastName = cursor.getString(cursor.getColumnIndexOrThrow("LAST_NAME"));
         cursor.close();
         return firstName + " " + lastName;
-    }
-
-
-    public int updateAdmin(Admin admin, String oldEmail) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("EMAIL", admin.getEmail());
-        contentValues.put("PHONE", admin.getPhoneNumber());
-        contentValues.put("FIRST_NAME", admin.getFirstName());
-        contentValues.put("LAST_NAME", admin.getLastName());
-        contentValues.put("HASHED_PASSWORD", admin.getHashedPassword());
-        contentValues.put("ROLE", "Admin");
-        return sqLiteDatabase.update("USER", contentValues, "EMAIL = ?", new String[]{oldEmail});
     }
 
     public int updatePassenger(Passenger passenger, String oldEmail) {

@@ -81,7 +81,7 @@ public class ConfirmSummaryFragment extends Fragment {
         dataBaseHelper = new DataBaseHelper(getContext());
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         summaryContainer = view.findViewById(R.id.summaryContainer);
-        fillSummary();
+//        fillSummary();
 
 
         buttonConfirm = view.findViewById(R.id.buttonConfirm);
@@ -91,59 +91,5 @@ public class ConfirmSummaryFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("reservationConfirmed", result);
             getActivity().onBackPressed();
         });
-    }
-
-    @SuppressLint("Range")
-    private void fillSummary() {
-        View summaryView = getLayoutInflater().inflate(R.layout.summary_card, summaryContainer, false);
-        TextView textViewFlightNumber = summaryView.findViewById(R.id.textViewFlightNumber);
-        TextView textViewFrom = summaryView.findViewById(R.id.textViewFrom);
-        TextView textViewTo = summaryView.findViewById(R.id.textViewTo);
-        TextView textViewDepartureDate = summaryView.findViewById(R.id.textViewDepartureDate);
-        TextView textViewArrivalDate = summaryView.findViewById(R.id.textViewArrivalDate);
-        TextView textViewDepartureTime = summaryView.findViewById(R.id.textViewDepartureTime);
-        TextView textViewArrivalTime = summaryView.findViewById(R.id.textViewArrivalTime);
-        TextView textViewFoodPreference = summaryView.findViewById(R.id.textViewFood);
-        TextView textViewFlightClass = summaryView.findViewById(R.id.textViewClass);
-        TextView textViewNumOfExtraBags = summaryView.findViewById(R.id.textViewBags);
-        TextView textViewTotalPrice = summaryView.findViewById(R.id.textViewPrice);
-
-        Cursor cursor = dataBaseHelper.getFlightById(flightId);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                textViewFlightNumber.setText(cursor.getString(cursor.getColumnIndexOrThrow("FLIGHT_NUMBER")));
-                textViewFrom.setText(cursor.getString(cursor.getColumnIndexOrThrow("DEPARTURE_CITY")));
-                textViewTo.setText(cursor.getString(cursor.getColumnIndexOrThrow("DESTINATION_CITY")));
-
-                String departureDateTime = cursor.getString(cursor.getColumnIndex("DEPARTURE_DATETIME"));
-                String[] departureParts = departureDateTime.split(" ");
-                if (departureParts.length == 2) {
-                    textViewDepartureDate.setText(departureParts[0]);
-                    textViewDepartureTime.setText(departureParts[1]);
-                }
-
-                String arrivalDateTime = cursor.getString(cursor.getColumnIndex("ARRIVAL_DATETIME"));
-                String[] arrivalParts = arrivalDateTime.split(" ");
-                if (arrivalParts.length == 2) {
-                    textViewArrivalDate.setText(arrivalParts[0]);
-                    textViewArrivalTime.setText(arrivalParts[1]);
-                }
-
-                textViewFoodPreference.setText(foodPreference);
-                textViewFlightClass.setText(flightClass);
-                textViewNumOfExtraBags.setText(numOfExtraBags);
-                textViewTotalPrice.setText(totalPrice);
-
-                ImageView planeImageView = summaryView.findViewById(R.id.plane);
-                Animation planeAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.plane_animation);
-                planeImageView.startAnimation(planeAnimation);
-
-                summaryContainer.addView(summaryView);
-
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-        dataBaseHelper.close();
     }
 }
