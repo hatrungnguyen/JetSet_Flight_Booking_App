@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.birzeit.jetset.R;
-import edu.birzeit.jetset.activities.AdminHomeActivity;
+//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 import edu.birzeit.jetset.model.Reservation;
@@ -85,9 +85,9 @@ public class ConfirmReservationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Confirm Reservation");
-        if (getActivity() instanceof AdminHomeActivity) {
-            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-        }
+//        if (getActivity() instanceof AdminHomeActivity) {
+//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
+//        }
         if (getArguments() != null) {
             flightId = getArguments().getString("FLIGHT_ID");
             passengerEmail = getArguments().getString("PASSENGER_EMAIL");

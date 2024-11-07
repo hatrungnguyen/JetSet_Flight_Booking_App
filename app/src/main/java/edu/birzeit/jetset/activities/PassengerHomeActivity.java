@@ -92,10 +92,10 @@ public class PassengerHomeActivity extends AppCompatActivity implements Navigati
         if (itemId == R.id.nav_home) {
             selectedFragment = new HomeFragment();
             title = "Home";
-        } else if (itemId == R.id.nav_my_reservations) {
+        } /*else if (itemId == R.id.nav_my_reservations) {
             selectedFragment = new MyReservationsFragment();
             title = "My Reservations";
-        } else if (itemId == R.id.nav_view_all_flights) {
+        }*/ else if (itemId == R.id.nav_view_all_flights) {
             selectedFragment = new AllFlightsFragment();
             title = "All Flights";
         } else if (itemId == R.id.nav_edit_profile) {

@@ -59,7 +59,8 @@
         app:menu="@menu/nav_menu_admin"
         android:background="@color/white"
         app:subheaderInsetEnd="0dp"
-        app:subheaderInsetStart="0dp" />
+        app:subheaderInsetStart="0dp"
+        />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
