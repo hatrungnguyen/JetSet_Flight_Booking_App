@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import edu.birzeit.jetset.R;
-//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
@@ -59,9 +58,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Home");
-//        if (getActivity() instanceof AdminHomeActivity) {
-//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-//        }
 
 
         dataBaseHelper = new DataBaseHelper(getContext());

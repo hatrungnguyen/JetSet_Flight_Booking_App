@@ -27,7 +27,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import edu.birzeit.jetset.R;
-//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
@@ -81,9 +80,6 @@ public class ReservationsOnFlightsFragment extends Fragment {
 
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Flight Reservations");
-//        if (getActivity() instanceof AdminHomeActivity) {
-//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-//        }
 
         findAndSetupViews();
         fillFlights();

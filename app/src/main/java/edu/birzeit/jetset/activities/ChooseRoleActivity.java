@@ -31,15 +31,12 @@ public class ChooseRoleActivity extends AppCompatActivity {
             return insets;
         });
 
-//        admin = findViewById(R.id.radio_admin);
         passenger = findViewById(R.id.radio_passenger);
         continueButton = findViewById(R.id.buttonContinue);
 
         continueButton.setOnClickListener(v -> {
             Intent intent;
-//            if (admin.isChecked()) {
-//                intent = new Intent(ChooseRoleActivity.this, SignUpAdminActivity.class);
-//                startActivity(intent);
+
             if (passenger.isChecked()) {
                 intent = new Intent(ChooseRoleActivity.this, SignUpPassengerActivity.class);
                 startActivity(intent);

@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import edu.birzeit.jetset.R;
-//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 
@@ -65,9 +64,6 @@ public class FlightsBasedOnBookingFragment extends Fragment {
         dataBaseHelper = new DataBaseHelper(getContext());
         SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Flights by Booking");
-//        if (getActivity() instanceof AdminHomeActivity) {
-//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-//        }
         cursor = dataBaseHelper.getFlightsOpenForBooking();
 
 //        findViews();

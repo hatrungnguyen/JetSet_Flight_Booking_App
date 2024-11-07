@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.birzeit.jetset.R;
-//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 import edu.birzeit.jetset.model.Flight;
@@ -81,20 +80,14 @@ public class FlightDetailsAdminFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_flight_details_admin, container, false);
-    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Flight Details");
-//        if (getActivity() instanceof AdminHomeActivity) {
-//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-//        }
+
 
 
         if (getArguments() != null) {
@@ -292,10 +285,7 @@ public class FlightDetailsAdminFragment extends Fragment {
         editEconomyPrice = getView().findViewById(R.id.editEconomyPrice);
         editBusinessPrice = getView().findViewById(R.id.editBusinessPrice);
         spinnerIsRecurrent = getView().findViewById(R.id.spinnerIsRecurrent);
-        currentReservations = getView().findViewById(R.id.currentReservations);
-        missedReservations = getView().findViewById(R.id.missedReservations);
         saveButton = getView().findViewById(R.id.buttonSave);
-        deleteButton = getView().findViewById(R.id.buttonDelete);
     }
 
     @SuppressLint("Range")

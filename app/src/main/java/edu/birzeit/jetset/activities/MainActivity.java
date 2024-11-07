@@ -76,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         if (isLoggedIn)
             if (sharedPrefManager.readString(USER_ROLE, "").equals("Passenger"))
                 navigateToPassengerHome();
-//            else if (sharedPrefManager.readString(USER_ROLE, "").equals("Admin"))
-//                navigateToAdminHome();
 
 
         login.setOnClickListener(v -> {
@@ -102,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
                 sharedPrefManager.apply();
 
                 if (userRole.equals("Passenger")) navigateToPassengerHome();
-//                else if (userRole.equals("Admin")) navigateToAdminHome();
             } else displayToast("Invalid email or password");
         });
 
@@ -125,12 +122,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionAsyncTa
         }
     }
 
-//    private void navigateToAdminHome() {
-//        dataBaseHelper.close();
-//        Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
 
     private void navigateToPassengerHome() {
         dataBaseHelper.close();

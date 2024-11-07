@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import edu.birzeit.jetset.R;
-//import edu.birzeit.jetset.activities.AdminHomeActivity;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
 import edu.birzeit.jetset.model.Admin;
@@ -56,20 +55,11 @@ public class EditProfileAdminFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_profile_admin, container, false);
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dataBaseHelper = new DataBaseHelper(getContext());
         sharedPrefManager = SharedPrefManager.getInstance(getContext());
         sharedPrefManager.writeToolbarTitle("Edit Profile");
-//        if (getActivity() instanceof AdminHomeActivity) {
-//            ((AdminHomeActivity) getActivity()).toolbarTitle.setText(sharedPrefManager.readToolbarTitle());
-//        }
         oldEmail = sharedPrefManager.readString(SAVED_EMAIL, "");
 
         findViews();
