@@ -67,11 +67,7 @@ public class ReservationsOnFlightsFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reservations_on_flights, container, false);
-    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -231,13 +227,9 @@ public class ReservationsOnFlightsFragment extends Fragment {
     private void openFlightReservationsFragment(String flightId) {
         Bundle bundle = new Bundle();
         bundle.putString("FLIGHT_ID", flightId);
-
-        FlightReservationsFragment flightReservationsFragment = new FlightReservationsFragment();
-        flightReservationsFragment.setArguments(bundle);
-
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, flightReservationsFragment);
+
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
