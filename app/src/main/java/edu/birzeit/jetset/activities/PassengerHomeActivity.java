@@ -24,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 import edu.birzeit.jetset.Fragments.AllFlightsFragment;
 import edu.birzeit.jetset.Fragments.EditProfilePassengerFragment;
 import edu.birzeit.jetset.Fragments.HomeFragment;
-import edu.birzeit.jetset.Fragments.MyReservationsFragment;
 import edu.birzeit.jetset.R;
 import edu.birzeit.jetset.database.DataBaseHelper;
 import edu.birzeit.jetset.database.SharedPrefManager;
@@ -92,9 +91,9 @@ public class PassengerHomeActivity extends AppCompatActivity implements Navigati
         if (itemId == R.id.nav_home) {
             selectedFragment = new HomeFragment();
             title = "Home";
-        } else if (itemId == R.id.nav_my_reservations) {
-            selectedFragment = new MyReservationsFragment();
-            title = "My Reservations";
+//        } else if (itemId == R.id.nav_my_reservations) {
+//            selectedFragment = new MyReservationsFragment();
+//            title = "My Reservations";
         } else if (itemId == R.id.nav_view_all_flights) {
             selectedFragment = new AllFlightsFragment();
             title = "All Flights";

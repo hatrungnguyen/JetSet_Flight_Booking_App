@@ -31,21 +31,6 @@
     <group
         android:id="@+id/nav_group3"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_view_reservations"
-            android:icon="@drawable/reserve_horizontal"
-            android:title="Reservations on Flights" />
-
-
-        <item
-            android:id="@+id/nav_view_open"
-            android:icon="@drawable/booking"
-            android:title="Flights Based on Booking" />
-
-        <item
-            android:id="@+id/nav_view_archive"
-            android:icon="@drawable/archive"
-            android:title="Flights Archive" />
     </group>
 
     <group

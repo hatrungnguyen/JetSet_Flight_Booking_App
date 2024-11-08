@@ -73,12 +73,6 @@ public class ConfirmReservationFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_confirm_reservation, container, false);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -174,18 +168,6 @@ public class ConfirmReservationFragment extends Fragment {
     }
 
     private void findViews() {
-        textViewPassengerName = getView().findViewById(R.id.textViewPassengerName);
-        textViewPhoneNumber = getView().findViewById(R.id.textViewPhoneNumber);
-        textViewEmail = getView().findViewById(R.id.textViewEmail);
-        textViewPassportNumber = getView().findViewById(R.id.textViewPassportNumber);
-        textViewIssuePlace = getView().findViewById(R.id.textViewIssuePlace);
-        textViewIssueDate = getView().findViewById(R.id.textViewIssueDate);
-        textViewExpirationDate = getView().findViewById(R.id.textViewExpirationDate);
-        textViewDOB = getView().findViewById(R.id.textViewDOB);
-        textViewNationality = getView().findViewById(R.id.textViewNationality);
-        spinnerFoodPreference = getView().findViewById(R.id.spinnerFoodPreference);
-        spinnerFlightClass = getView().findViewById(R.id.spinnerFlightClass);
-        editNumOfExtraBags = getView().findViewById(R.id.editNumOfExtraBags);
         buttonConfirmReservation = getView().findViewById(R.id.buttonConfirm);
     }
 
